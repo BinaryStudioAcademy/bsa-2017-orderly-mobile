@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { Button, StyleSheet, Text, View } from 'react-native';
-import { NavigationActions } from 'react-navigation';
 
 const styles = StyleSheet.create({
   container: {
@@ -18,32 +16,27 @@ const styles = StyleSheet.create({
   },
 });
 
-const LoginScreen = ({ navigation, dispatch }) => (
+const SignupScreen = ({ navigation }) => (
   <View style={styles.container}>
     <Text style={styles.welcome}>
-      Login
+      Sign up
     </Text>
     <Text style={styles.instructions}>
-      This is great
+      Create an account
     </Text>
     <Button
       onPress={() => navigation.dispatch({ type: 'Login' })}
-      title="Log in"
-    />
-    <Button
-      onPress={() =>
-        dispatch(NavigationActions.navigate({ routeName: 'Signup' }))}
-      title="Signup"
+      title="Sign up"
     />
   </View>
 );
 
-LoginScreen.propTypes = {
-  navigation: PropTypes.object.isRequired
+SignupScreen.propTypes = {
+  navigation: PropTypes.object.isRequired,
 };
 
-LoginScreen.navigationOptions = {
-  title: 'Log In',
+SignupScreen.navigationOptions = {
+  title: 'Sign Up',
 };
 
-export default connect()(LoginScreen);
+export default SignupScreen;
