@@ -40,7 +40,7 @@ LoginStatusMessage.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isLoggedIn: state.auth.isLoggedIn,
 });
 
