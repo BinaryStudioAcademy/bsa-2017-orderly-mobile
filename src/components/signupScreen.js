@@ -26,7 +26,7 @@ const SignupScreen = ({ navigation }) => (
     </Text>
     <Button
       onPress={() => navigation.dispatch({ type: 'Login' })}
-      title="Sign up"
+      title="Login"
     />
   </View>
 );
