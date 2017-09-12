@@ -17,11 +17,11 @@ AuthButton.propTypes = {
   loginScreen: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isLoggedIn: state.auth.isLoggedIn,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   logout: () => dispatch({ type: 'Logout' }),
   loginScreen: () =>
     dispatch(NavigationActions.navigate({ routeName: 'Login' })),
