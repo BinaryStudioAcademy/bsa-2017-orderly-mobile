@@ -28,6 +28,7 @@ AppWithNavigationState.propTypes = {
 
 const mapStateToProps = (state) => ({
     nav: state.nav,
+    dashboard: state.dashboard,
 });
 
 export default connect(mapStateToProps)(AppWithNavigationState);

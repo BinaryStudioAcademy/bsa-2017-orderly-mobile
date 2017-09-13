@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   AppRegistry, StyleSheet, Text, View, Button, Image, FlatList
 } from 'react-native';
 import { Icon } from 'react-native-elements'
 
-export default class Dashboard extends Component {
+class Dashboard extends Component {
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -25,7 +27,7 @@ export default class Dashboard extends Component {
             }}/>
             <View style={styles.baseTitle}>
               <Icon name='book'/>
-              <Text style={styles.baseName}>{this.state.baseName || 'Default'}</Text>
+              <Text style={styles.baseName}>{this.props.user || 'Default'} </Text>
             </View>
             <Image style={styles.headerUser} source={require('../../images/default-avatar.png')}/>
           </View>
@@ -86,4 +88,8 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('Dashboard', () => Dashboard);
+const mapStateToProps = (state) => ({
+  dashboard: state.dashboard
+});
+
+export default connect(mapStateToProps)(Dashboard);

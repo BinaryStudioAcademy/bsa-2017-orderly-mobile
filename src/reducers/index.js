@@ -49,9 +49,33 @@ function auth(state = initialAuthState, action) {
     }
 }
 
+const initialDashboardState = {
+    base: {name: 'Clones', color: '#CCC', icon: 'book'},
+    user: {name: 'Darth', ava: require('../images/default-avatar.png')},
+}
+
+function dashboard(state = initialDashboardState, action) {
+    let nextState;
+    switch (action.type) {
+        case 'Home':
+            nextState = AppNavigator.router.getStateForAction(
+                NavigationActions.navigate({ routeName: 'Home' }),
+                state
+            );
+            break;
+        default:
+            nextState = AppNavigator.router.getStateForAction(action, state);
+            break;
+    }
+
+    return nextState || state;
+}
+
+
 const AppReducer = combineReducers({
     nav,
     auth,
+    dashboard,
 });
 
 export default AppReducer;
