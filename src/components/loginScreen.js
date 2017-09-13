@@ -16,12 +16,10 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
         width: 137,
         height: 31,
-        marginTop: 20,
-        marginLeft: 12,
-        marginBottom: 20
+        margin: 14
     },
     header: {
-        fontSize: 20,
+        fontSize: 26,
         margin: 10,
     },
     signInButton: {
@@ -31,12 +29,12 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start'
     },
     text: {
-        fontSize: 20,
+        fontSize: 18,
         textAlign: 'left',
-        marginLeft: 12
+        marginLeft: 14
     },
     signUpButton: {
-        backgroundColor: 'blue',
+        alignSelf: 'flex-start',
         color: 'white'
     }
 });
@@ -46,9 +44,11 @@ const LoginScreen = ({ navigation, dispatch }) => (
         <Image style={styles.image} source={require('../images/logo.png')} ></Image>
         <Text style={styles.header}>
             Sign in
-        </Text>        
+        </Text>
         <Card>
-                <FormLabel>Email</FormLabel>
+                <FormLabel>
+
+                </FormLabel>
                 <FormInput
                     placeholder="Email address..."
                     small
@@ -56,7 +56,9 @@ const LoginScreen = ({ navigation, dispatch }) => (
                     Icon={{name: 'mail'}}
 
                 />
-                <FormLabel>Password</FormLabel>
+                <FormLabel>
+
+                </FormLabel>
                 <FormInput
                     secureTextEntry
                     placeholder="Password..."
@@ -78,6 +80,7 @@ const LoginScreen = ({ navigation, dispatch }) => (
             </Text>
             <Button
                 style={styles.signUpButton}
+                backgroundColor="#ff7b00"
                 onPress={() =>
                     dispatch(NavigationActions.navigate({ routeName: 'Signup' }))}
                 small
@@ -92,7 +95,7 @@ LoginScreen.propTypes = {
 };
 
 LoginScreen.navigationOptions = {
-    title: 'Log In',
+    title: 'Home page',
 };
 
 export default connect()(LoginScreen);
