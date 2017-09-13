@@ -51,7 +51,7 @@ function auth(state = initialAuthState, action) {
 
 const initialDashboardState = {
     base: {name: 'Clones', color: '#CCC', icon: 'book'},
-    user: {name: 'Darth', ava: require('../images/default-avatar.png')},
+    user: {name: 'Darth', ava: ''},
 }
 
 function dashboard(state = initialDashboardState, action) {
@@ -59,12 +59,13 @@ function dashboard(state = initialDashboardState, action) {
     switch (action.type) {
         case 'Home':
             nextState = AppNavigator.router.getStateForAction(
-                NavigationActions.navigate({ routeName: 'Home' }),
+                NavigationActions.back(),
                 state
             );
             break;
         default:
-            nextState = AppNavigator.router.getStateForAction(action, state);
+            // nextState = AppNavigator.router.getStateForAction(action, state);
+            nextState = state;
             break;
     }
 

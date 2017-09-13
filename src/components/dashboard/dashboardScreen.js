@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
-  AppRegistry, StyleSheet, Text, View, Button, Image, FlatList
-} from 'react-native';
-import { Icon } from 'react-native-elements'
+import { StyleSheet, Text, View, Button, Image, FlatList } from 'react-native';
+import { Icon } from 'react-native-elements';
 
 class Dashboard extends Component {
-  
+
   constructor(props) {
     super(props);
     this.state = {
@@ -26,20 +24,21 @@ class Dashboard extends Component {
                 this.setState({baseName: 'Clones'});
             }}/>
             <View style={styles.baseTitle}>
-              <Icon name='book'/>
-              <Text style={styles.baseName}>{this.props.user || 'Default'} </Text>
+              <Icon type='font-awesome' name='cogs'/>
+              <Text style={styles.baseName}>{this.props.dashboard.base.name || 'Default'} </Text>
             </View>
             <Image style={styles.headerUser} source={require('../../images/default-avatar.png')}/>
           </View>
         </View>
+        {/* <Text>{this.props.dashboard.base.name}</Text> */}
         <FlatList
-            data={[
-              {key: 'Devin'},{key: 'Jackson'},{key: 'James'},{key: 'Joel'},{key: 'John'},{key: 'Jillian'},{key: 'Jimmy'},{key: 'Julie'},
-              {key: 'Devin2'},{key: 'Jackson2'},{key: 'James2'},{key: 'Joel2'},{key: 'John2'},{key: 'Jillian2'},{key: 'Jimmy2'},{key: 'Julie2'},
-              {key: 'Devin3'},{key: 'Jackson3'},{key: 'James3'},{key: 'Joel3'},{key: 'John3'},{key: 'Jillian3'},{key: 'Jimmy3'},{key: 'Julie3'},
-            ]}
-            renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
-          />
+          data={[
+            {key: 'Devin'},{key: 'Jackson'},{key: 'James'},{key: 'Joel'},{key: 'John'},{key: 'Jillian'},{key: 'Jimmy'},{key: 'Julie'},
+            {key: 'Devin2'},{key: 'Jackson2'},{key: 'James2'},{key: 'Joel2'},{key: 'John2'},{key: 'Jillian2'},{key: 'Jimmy2'},{key: 'Julie2'},
+            {key: 'Devin3'},{key: 'Jackson3'},{key: 'James3'},{key: 'Joel3'},{key: 'John3'},{key: 'Jillian3'},{key: 'Jimmy3'},{key: 'Julie3'},
+          ]}
+          renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
+        />
       </View>
     );
   }
@@ -52,6 +51,7 @@ const styles = StyleSheet.create({
   },
   header: {
     height: 50,
+    marginBottom: 5,
     backgroundColor: '#000',
   },
   headerBase: {
@@ -72,6 +72,7 @@ const styles = StyleSheet.create({
     // flex: 1,
     textAlign: 'center',
     fontSize: 20,
+    margin: 5,
   },
   headerUser: {
     height: 50,
@@ -91,5 +92,5 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => ({
   dashboard: state.dashboard
 });
-
+// export default Dashboard;
 export default connect(mapStateToProps)(Dashboard);
