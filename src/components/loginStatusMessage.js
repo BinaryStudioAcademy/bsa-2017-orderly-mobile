@@ -28,7 +28,7 @@ const LoginStatusMessage = ({ isLoggedIn, dispatch }) => {
       />
       <Button
         onPress={() =>
-          dispatch(NavigationActions.navigate({ routeName: 'Dashboard' }))}
+          dispatch(NavigationActions.navigate({ routeName: 'Dashboard', title: 'Base name'}))}
         title="Dashboard"
       />
     </View>

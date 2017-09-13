@@ -4,6 +4,9 @@ import { StyleSheet, Text, View, Button, Image, FlatList } from 'react-native';
 import { Icon } from 'react-native-elements';
 
 class Dashboard extends Component {
+  static navigationOptions = ({navigation}) => {
+    title: 'Dashboard'
+  }
 
   constructor(props) {
     super(props);

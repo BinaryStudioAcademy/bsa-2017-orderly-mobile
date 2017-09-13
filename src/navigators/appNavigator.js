@@ -10,24 +10,24 @@ import ProfileScreen from '../components/profileScreen';
 import DashboardScreen from '../components/dashboard/dashboardScreen';
 
 export const AppNavigator = StackNavigator({
-    Login: { screen: LoginScreen },
-    Signup: { screen: SignupScreen },
-    Home: { screen: HomeScreen },
-    Profile: { screen: ProfileScreen },
-    Dashboard: { screen: DashboardScreen }
+  Login: { screen: LoginScreen },
+  Signup: { screen: SignupScreen },
+  Home: { screen: HomeScreen },
+  Profile: { screen: ProfileScreen },
+  Dashboard: { screen: DashboardScreen }
 });
 
 const AppWithNavigationState = ({ dispatch, nav }) => (
-    <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })} />
+  <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })} />
 );
 
 AppWithNavigationState.propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    nav: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  nav: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-    nav: state.nav,
+  nav: state.nav,
 });
 
 export default connect(mapStateToProps)(AppWithNavigationState);

@@ -8,75 +8,74 @@ const firstAction = AppNavigator.router.getActionForPathAndParams('Home');
 const tempNavState = AppNavigator.router.getStateForAction(firstAction);
 const secondAction = AppNavigator.router.getActionForPathAndParams('Login');
 const initialNavState = AppNavigator.router.getStateForAction(
-    secondAction,
-    tempNavState
+  secondAction,
+  tempNavState
 );
 
 function nav(state = initialNavState, action) {
-    let nextState;
-    switch (action.type) {
-        case 'Login':
-            nextState = AppNavigator.router.getStateForAction(
-                NavigationActions.back(),
-                state
-            );
-            break;
-        case 'Logout':
-            nextState = AppNavigator.router.getStateForAction(
-                NavigationActions.navigate({ routeName: 'Login' }),
-                state
-            );
-            break;
-        default:
-            nextState = AppNavigator.router.getStateForAction(action, state);
-            break;
-    }
-
-    // Simply return the original `state` if `nextState` is null or undefined.
-    return nextState || state;
+  let nextState;
+  switch (action.type) {
+  case 'Login':
+    nextState = AppNavigator.router.getStateForAction(
+      NavigationActions.back(),
+      state
+    );
+    break;
+  case 'Logout':
+    nextState = AppNavigator.router.getStateForAction(
+      NavigationActions.navigate({ routeName: 'Login' }),
+      state
+    );
+    break;
+  default:
+    nextState = AppNavigator.router.getStateForAction(action, state);
+    break;
+  }
+  
+  // Simply return the original `state` if `nextState` is null or undefined.
+  return nextState || state;
 }
 
 const initialAuthState = { isLoggedIn: false };
 
 function auth(state = initialAuthState, action) {
-    switch (action.type) {
-        case 'Login':
-            return { ...state, isLoggedIn: true };
-        case 'Logout':
-            return { ...state, isLoggedIn: false };
-        default:
-            return state;
-    }
+  switch (action.type) {
+  case 'Login':
+    return { ...state, isLoggedIn: true };
+  case 'Logout':
+    return { ...state, isLoggedIn: false };
+  default:
+    return state;
+  }
 }
 
 const initialDashboardState = {
-    base: {name: 'Clones', color: '#CCC', icon: 'book'},
-    user: {name: 'Darth', ava: ''},
-}
+  base: {name: 'Clones', color: '#CCC', icon: 'computer'},
+  user: {name: 'Darth', ava: ''},
+};
 
 function dashboard(state = initialDashboardState, action) {
-    let nextState;
-    switch (action.type) {
-        case 'Home':
-            nextState = AppNavigator.router.getStateForAction(
-                NavigationActions.back(),
-                state
-            );
-            break;
-        default:
-            // nextState = AppNavigator.router.getStateForAction(action, state);
-            nextState = state;
-            break;
-    }
-
-    return nextState || state;
+  let nextState;
+  switch (action.type) {
+  case 'Home':
+    nextState = AppNavigator.router.getStateForAction(
+      NavigationActions.back(),
+      state
+    );
+    break;
+  default:
+    // nextState = AppNavigator.router.getStateForAction(action, state);
+    nextState = state;
+    break;
+  }
+  
+  return nextState || state;
 }
 
-
 const AppReducer = combineReducers({
-    nav,
-    auth,
-    dashboard,
+  nav,
+  auth,
+  dashboard,
 });
 
 export default AppReducer;
