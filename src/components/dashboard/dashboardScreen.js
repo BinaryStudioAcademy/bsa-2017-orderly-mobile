@@ -24,7 +24,7 @@ export default class Dashboard extends Component {
                 this.setState({baseName: 'Clones'});
             }}/>
             <View style={styles.baseTitle}>
-              <Icon name='computer'/>
+              <Icon name='book'/>
               <Text style={styles.baseName}>{this.state.baseName || 'Default'}</Text>
             </View>
             <Image style={styles.headerUser} source={require('../../images/default-avatar.png')}/>
