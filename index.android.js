@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
 import { AppRegistry } from 'react-native';
-import Dashboard from './components/dashboard/dashboard';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 
-export default class OrderlyNative extends Component {
+import AppReducer from './src/reducers';
+import AppWithNavigationState from './src/navigators/appNavigator';
 
-  render() {
-    return (
-      <Dashboard/>
-    );
-  }
+class OrderlyNative extends React.Component {
+    store = createStore(AppReducer);
+
+    render() {
+        return (
+            <Provider store={this.store}>
+                <AppWithNavigationState />
+            </Provider>
+        );
+    }
 }
 
 AppRegistry.registerComponent('OrderlyNative', () => OrderlyNative);
+
+export default OrderlyNative;
