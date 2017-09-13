@@ -54,3 +54,6 @@ fastlane/screenshots
 
 # VSCODE
 .vscode/
+
+# React Native packager
+*react-native-packager*
