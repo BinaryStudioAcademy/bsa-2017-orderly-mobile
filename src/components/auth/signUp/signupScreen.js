@@ -12,6 +12,9 @@ import * as signUpActions from './signUpActions';
 class SignupScreen extends Component {
     constructor(props) {
         super(props);
+
+        this.processForm = this.processForm.bind(this);
+        this.changeUserData = this.changeUserData.bind(this);
     }
 /*
     handleSignUp = () => {
@@ -99,6 +102,10 @@ class SignupScreen extends Component {
         );
     }
 }
+
+SignupScreen.navigationOptions = {
+    title: 'Login',
+};
 
 function mapStateToProps(state) {
     return {
