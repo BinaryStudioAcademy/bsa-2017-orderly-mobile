@@ -13,38 +13,38 @@ import Auth from '../components/auth/auth';
 import AppConfig from '../config';
 
 export const AppNavigator = StackNavigator({
-  Login: { screen: LoginScreen },
-  Signup: { screen: SignupScreen },
-  Home: { screen: HomeScreen },
-  Profile: { screen: ProfileScreen },
-  Dashboard: { screen: DashboardScreen }
+    Login: { screen: LoginScreen },
+    Signup: { screen: SignupScreen },
+    Home: { screen: HomeScreen },
+    Profile: { screen: ProfileScreen },
+    Dashboard: { screen: DashboardScreen }
 });
 
 const AppWithNavigationState = ({ dispatch, nav }) => (
-  <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })} />
+    <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })} />
 );
 
 AppWithNavigationState.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  nav: PropTypes.object.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    nav: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  nav: state.nav,
+    nav: state.nav,
 });
 
 export default connect(mapStateToProps)(AppWithNavigationState);
 
 (function() {
     axios.defaults.baseURL = AppConfig.host;
-
+    
     const token = Auth.getToken();
     if (token) {
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
     } else {
         axios.defaults.headers.common['Authorization'] = null;
     }
-
+    
     // Add a response interceptor
     axios.interceptors.response.use(null,
         function (error) {
@@ -53,7 +53,7 @@ export default connect(mapStateToProps)(AppWithNavigationState);
                     Auth.deauthenticateUser();
                 }
                 //browserHistory.push('/login');
-                navigation.dispatch({ type: 'Login' })
+                navigation.dispatch({ type: 'Login' });
             }
             return Promise.reject(error.response);
         });
