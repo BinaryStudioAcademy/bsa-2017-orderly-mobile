@@ -90,7 +90,7 @@ class SignupScreen extends Component {
                         style={styles.signInButton}
                         backgroundColor="#03A9F4"
                         onPress={() =>
-                            dispatch(NavigationActions.navigate({ routeName: 'Login' }))}
+                            this.props.navigation.navigate('Login')}
                         small
                         title="Sign in"
                     />

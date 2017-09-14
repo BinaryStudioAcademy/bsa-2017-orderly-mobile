@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { AsyncStorage } from 'react-native';
+//var {AsyncStorage} = ReactNative;
 
 class Auth {
 
@@ -7,7 +9,7 @@ class Auth {
      *
      * @param {string} token
      */
-    static authenticateUser(token) {
+    static async authenticateUser(token) {
 //localStorage.setItem('token', token);
 //axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
         try {
@@ -23,7 +25,7 @@ class Auth {
      *
      * @returns {boolean}
      */
-    static isUserAuthenticated() {
+    static async isUserAuthenticated() {
         try {
           const value = await AsyncStorage.getItem('token');
           return value !== null;
@@ -37,7 +39,7 @@ class Auth {
      * Deauthenticate a user. Remove a token from Local Storage.
      *
      */
-    static deauthenticateUser() {
+    static async deauthenticateUser() {
 //        localStorage.removeItem('token');
 //        axios.defaults.headers.common['Authorization'] = null;
         try {
@@ -54,7 +56,7 @@ class Auth {
      * @returns {string}
      */
 
-    static getToken() {
+    static async getToken() {
         try {
           const value = await AsyncStorage.getItem('token');
           return value;
