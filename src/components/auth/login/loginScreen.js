@@ -9,16 +9,12 @@ import R from 'ramda';
 import * as LoginActions from './loginActions';
 
 class LoginScreen extends Component {
+/*
     static navigationOptions = ({navigation}) => {
         title: 'Home page'
     }
+*/
 
-//  constructor(props) {
-//    super(props);
-//    this.state = {
-//      baseName: '',
-//    };
-//  }
     constructor(props) {
         super(props);
         this.props = props;
@@ -124,6 +120,9 @@ LoginScreen.propTypes = {
     login: PropTypes.object.isRequired
 };
 */
+LoginScreen.navigationOptions = {
+    title: 'Home page',
+};
 
 function mapStateToProps(state) {
     return {
