@@ -5,7 +5,6 @@ import Auth from '../auth';
 
 export let loginService = {
     login(data) {
-    debugger;
         if (data && data.token) {
             // save the token
             Auth.authenticateUser(data.token);
@@ -16,7 +15,7 @@ export let loginService = {
     },
 
     redirectLoggedInUser() {
-        Auth.isUserAuthenticated(isUserAuthenticated => {
+        Auth.isUserAuthenticated().then(isUserAuthenticated => {
             if (isUserAuthenticated) {
                 getCurrentUser()
                     .then(() => NavigatorService.navigate('Home')/*; browserHistory.push('/')*/) // ?????
