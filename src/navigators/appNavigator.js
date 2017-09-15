@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addNavigationHelpers, StackNavigator } from 'react-navigation';
+import { addNavigationHelpers, StackNavigator, NavigationActions } from 'react-navigation';
 import axios from 'axios';
 //import {browserHistory} from 'react-router';
 import LoginScreen from '../components/auth/login/loginScreen';
@@ -38,22 +38,28 @@ export default connect(mapStateToProps)(AppWithNavigationState);
 (function() {
     axios.defaults.baseURL = AppConfig.host;
 
-    const token = Auth.getToken();
-    if (token) {
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
-    } else {
-        axios.defaults.headers.common['Authorization'] = null;
-    }
+    Auth.getToken().then(token => {
+        debugger;
+        if (token) {
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+        } else {
+            axios.defaults.headers.common['Authorization'] = null;
+        }
+    });
 
     // Add a response interceptor
     axios.interceptors.response.use(null,
         function (error) {
-            if (error.response.status === 401) {
-                if (Auth.getToken()) {
-                    Auth.deauthenticateUser();
-                }
-                //browserHistory.push('/login');
-                navigation.dispatch({ type: 'Login' })
+            if (error.response && error.response.status === 401) {
+                debugger;
+                Auth.getToken().then(token => {
+                    if (token) {
+                        Auth.deauthenticateUser();
+                    }
+                    //browserHistory.push('/login');
+                    //navigation.dispatch({ type: 'Login' })
+                });
+                NavigationActions.navigate({ routeName: 'Login' });
             }
             return Promise.reject(error.response);
         });

@@ -1,4 +1,4 @@
 const API = {
-    host: 'http://localhost:2020'
+    host: 'http://192.168.2.110:2020'
 };
 export default API;

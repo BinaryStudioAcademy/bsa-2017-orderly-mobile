@@ -12,7 +12,7 @@ export default function* root() {
     yield all([
         fork(signUpSaga),
         fork(loginSaga)//,
-//        fork(logoutSaga),
+//        fork(logoutSaga)//,
 //        fork(userProfileSaga),
 //        fork(dashboardSaga),
 //        fork(homePageSaga),

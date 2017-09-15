@@ -29,10 +29,9 @@ class LoginScreen extends Component {
         this.props.redirectLoggedInUser();
     }
 
-    changeUserData(event) {
-        const field = event.target.name;
+    changeUserData(event, field) {
         const user = {};
-        user[field] = event.target.value;
+        user[field] = event.nativeEvent.text;
         this.props.changeUserData(user);
     }
 
@@ -66,7 +65,7 @@ class LoginScreen extends Component {
                             small
                             iconLeft
                             Icon={{name: 'mail'}}
-                            onChange={this.changeUserData}
+                            onChange={(event) => this.changeUserData(event, 'email')}
                         />
                         {this.props.login.errors.email &&
                         <FormLabel style={styles.errorLabel}>
@@ -80,7 +79,7 @@ class LoginScreen extends Component {
                             small
                             iconLeft
                             Icon={{name: 'lock'}}
-                            onChange={this.changeUserData}
+                            onChange={(event) => this.changeUserData(event, 'password')}
                         />
                         {this.props.login.errors.password &&
                         <FormLabel style={styles.errorLabel}>
