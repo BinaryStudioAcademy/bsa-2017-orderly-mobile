@@ -1,5 +1,5 @@
 //import {browserHistory} from 'react-router'; // ?????
-import { NavigationActions } from 'react-navigation';
+import NavigatorService from '../../../navigators/navigatorService';
 import { getCurrentUser } from './loginApi';
 import Auth from '../auth';
 
@@ -11,7 +11,7 @@ export let loginService = {
             Auth.authenticateUser(data.token);
             // change the current URL to /
             //browserHistory.push('/'); // ?????
-            NavigationActions.navigate({ routeName: 'Home' });
+            NavigatorService.navigate('Home');
         }
     },
 
@@ -19,7 +19,7 @@ export let loginService = {
         Auth.isUserAuthenticated(isUserAuthenticated => {
             if (isUserAuthenticated) {
                 getCurrentUser()
-                    .then(() => NavigationActions.navigate({ routeName: 'Home' })/*; browserHistory.push('/')*/) // ?????
+                    .then(() => NavigatorService.navigate('Home')/*; browserHistory.push('/')*/) // ?????
                     .catch((error) => console.error(error));
             }
         });

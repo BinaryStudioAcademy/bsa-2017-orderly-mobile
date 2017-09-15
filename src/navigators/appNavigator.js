@@ -11,6 +11,7 @@ import ProfileScreen from '../components/profile/profileScreen';
 import DashboardScreen from '../components/dashboard/dashboardScreen';
 import Auth from '../components/auth/auth';
 import AppConfig from '../config';
+import NavigatorService from './navigatorService';
 
 export const AppNavigator = StackNavigator({
     Login: { screen: LoginScreen },
@@ -21,7 +22,10 @@ export const AppNavigator = StackNavigator({
 });
 
 const AppWithNavigationState = ({ dispatch, nav }) => (
-    <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })} />
+    <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })}
+                  ref={navigatorRef => {
+                            NavigatorService.setContainer(navigatorRef);
+                       }}/>
 );
 
 AppWithNavigationState.propTypes = {
@@ -39,7 +43,6 @@ export default connect(mapStateToProps)(AppWithNavigationState);
     axios.defaults.baseURL = AppConfig.host;
 
     Auth.getToken().then(token => {
-        debugger;
         if (token) {
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
         } else {
@@ -51,7 +54,6 @@ export default connect(mapStateToProps)(AppWithNavigationState);
     axios.interceptors.response.use(null,
         function (error) {
             if (error.response && error.response.status === 401) {
-                debugger;
                 Auth.getToken().then(token => {
                     if (token) {
                         Auth.deauthenticateUser();
@@ -59,7 +61,7 @@ export default connect(mapStateToProps)(AppWithNavigationState);
                     //browserHistory.push('/login');
                     //navigation.dispatch({ type: 'Login' })
                 });
-                NavigationActions.navigate({ routeName: 'Login' });
+                NavigatorService.navigate('Login');
             }
             return Promise.reject(error.response);
         });

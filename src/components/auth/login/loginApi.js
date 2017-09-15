@@ -5,14 +5,12 @@ const currentUserUrl = '/api/user/me';
 const login = (user) =>
     axios.post(loginUrl, user)
         .then((response) => response.data)
-        .catch((error) => {debugger; console.log(error); return error; });
+        .catch((error) => error.data);
 
 const getCurrentUser = () =>
     axios.get(currentUserUrl)
-        .then((response) => {debugger; return response.data; })
-        .catch((error) => {debugger; console.log(error); return error; });
-//        .then((response) => response.data)
-//        .catch((error) => error.data);
+        .then((response) => response.data)
+        .catch((error) => error.data);
 
 export {
     login,
