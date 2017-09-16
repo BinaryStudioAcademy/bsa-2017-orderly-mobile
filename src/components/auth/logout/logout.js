@@ -4,11 +4,6 @@ import {connect} from 'react-redux';
 import * as LogoutActions from './logoutActions';
 
 class Logout extends Component {
-    /*constructor(props) {
-        super(props);
-        this.props = props;
-    }*/
-
     componentWillMount(){
         // Redirect to login page if user is logged in
         this.props.logout();
@@ -18,10 +13,6 @@ class Logout extends Component {
         return null;
     }
 }
-
-/*Logout.propTypes = {
-    logout: PropTypes.func.isRequired
-};*/
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators(Object.assign({}, LogoutActions),  dispatch);

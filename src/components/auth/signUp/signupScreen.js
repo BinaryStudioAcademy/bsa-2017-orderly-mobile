@@ -8,7 +8,6 @@ import { Button, FormLabel, FormInput, Card, Icon } from 'react-native-elements'
 import R from 'ramda';
 import * as signUpActions from './signUpActions';
 
-//const SignupScreen = ({ navigation, dispatch }) => (
 class SignupScreen extends Component {
     constructor(props) {
         super(props);
@@ -16,21 +15,10 @@ class SignupScreen extends Component {
         this.processForm = this.processForm.bind(this);
         this.changeUserData = this.changeUserData.bind(this);
     }
-/*
-    handleSignUp = () => {
-        this.props.signUp(this.props.signUp);
-    };
 
-    handleChange = (field) => {
-        this.props.changeSignUpForm({
-                [field.name]: field.value,
-            }
-        )
-    };
-    */
     changeUserData(event, field) {
         this.props.changeUserData({
-                field: event.nativeEvent.text
+                [field]: event.nativeEvent.text
             }
         )
     }
@@ -55,25 +43,49 @@ class SignupScreen extends Component {
                 <Text style={styles.instructions}>
                     Create an account
                 </Text>
-                <Card>
+
+                    {this.props.signUp.errors.message &&
+                    <Text style={styles.errorLabel}>
+                        {this.props.signUp.errors.message}
+                    </Text>}
+
+                    {this.props.signUp.errors.firstName &&
+                    <Text style={styles.errorLabel}>
+                        {this.props.signUp.errors.firstName}
+                    </Text>}
                     <FormInput
                         placeholder="First Name..."
                         name="firstName"
                         onChange={(event) => this.changeUserData(event, 'firstName')}
                         defaultValue="joh"
                     />
+
+                    {this.props.signUp.errors.lastName &&
+                    <Text style={styles.errorLabel}>
+                        {this.props.signUp.errors.lastName}
+                    </Text>}
                     <FormInput
                         placeholder="Last Name..."
                         name="lastName"
                         onChange={(event) => this.changeUserData(event, 'lastName')}
                         defaultValue="smit"
                     />
+
+                    {this.props.signUp.errors.email &&
+                    <Text style={styles.errorLabel}>
+                        {this.props.signUp.errors.email}
+                    </Text>}
                     <FormInput
                         placeholder="Email address..."
                         name="email"
                         onChange={(event) => this.changeUserData(event, 'email')}
                         defaultValue="mail@mail.co"
                     />
+
+                    {this.props.signUp.errors.password &&
+                    <Text style={styles.errorLabel}>
+                        {this.props.signUp.errors.password}
+                    </Text>}
                     <FormInput
                         secureTextEntry
                         placeholder="Password..."
@@ -81,14 +93,14 @@ class SignupScreen extends Component {
                         onChange={(event) => this.changeUserData(event, 'password')}
                         defaultValue="12345"
                     />
+
                     <Button
                         style={styles.signUpButton}
                         backgroundColor="#ff7b00"
                         title="Sign up for free"
-                        //onPress={() => navigation.dispatch({ type: 'Login' })}
                         onPress={(e) => this.processForm(e)}
                     />
-                </Card>
+
                 <View style={styles.signInBlock}>
                     <Text style={styles.text}>
                         Already have an account?
@@ -123,18 +135,6 @@ function mapDispatchToProps(dispatch) {
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignupScreen);
 
-/*
-SignupScreen.propTypes = {
-    navigation: PropTypes.object.isRequired,
-};
-
-SignupScreen.navigationOptions = {
-    title: 'Sign in',
-};
-
-export default connect()(SignupScreen);
-*/
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -146,14 +146,17 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
         width: 137,
         height: 31,
-        margin: 14
+        margin: 14,
+        marginBottom: 0
     },
     header: {
         fontSize: 26,
-        margin: 10
+        margin: 10,
+        marginTop: 0
     },
     errorLabel: {
-        backgroundColor: '#d73a49'
+        color: '#d73a49',
+        marginLeft: 19
     },
     instructions: {
         alignSelf: 'flex-start',

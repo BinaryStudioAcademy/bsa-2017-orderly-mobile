@@ -1,4 +1,3 @@
-//import {browserHistory} from 'react-router';
 import NavigatorService from '../../../navigators/navigatorService';
 import Auth from '../auth';
 
@@ -8,7 +7,7 @@ export let logoutService = {
             if (isUserAuthenticated) {
                 Auth.deauthenticateUser()
             }
-        });
-        NavigatorService.navigate('Login');
+            NavigatorService.navigate('Login');
+        }).catch(() => NavigatorService.navigate('Login'));
     }
 };

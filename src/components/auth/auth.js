@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { AsyncStorage } from 'react-native';
-//var {AsyncStorage} = ReactNative;
 
 class Auth {
 
@@ -10,13 +9,11 @@ class Auth {
      * @param {string} token
      */
     static async authenticateUser(token) {
-//localStorage.setItem('token', token);
-//axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
         try {
             await AsyncStorage.setItem('token', token);
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
         } catch (error) {
-            this._appendMessage('AsyncStorage error: ' + error.message); // ??????
+            this._appendMessage('AsyncStorage error: ' + error.message);
         }
     }
 
@@ -27,12 +24,12 @@ class Auth {
      */
     static async isUserAuthenticated() {
         try {
-          const value = await AsyncStorage.getItem('token');
-          return value !== null;
+            const value = await AsyncStorage.getItem('token');
+            return value !== null;
         } catch (error) {
-          // Error retrieving data
+            // Error retrieving data
+            this._appendMessage('AsyncStorage error: ' + error.message);
         }
-//return localStorage.getItem('token') !== null;
     }
 
     /**
@@ -40,13 +37,11 @@ class Auth {
      *
      */
     static async deauthenticateUser() {
-//        localStorage.removeItem('token');
-//        axios.defaults.headers.common['Authorization'] = null;
         try {
-          await AsyncStorage.removeItem('token');
-          axios.defaults.headers.common['Authorization'] = null;
+            await AsyncStorage.removeItem('token');
+            axios.defaults.headers.common['Authorization'] = null;
         } catch (error) {
-          this._appendMessage('AsyncStorage error: ' + error.message);
+            this._appendMessage('AsyncStorage error: ' + error.message);
         }
     }
 
@@ -58,12 +53,11 @@ class Auth {
 
     static async getToken() {
         try {
-          const value = await AsyncStorage.getItem('token');
-          return value;
+            const value = await AsyncStorage.getItem('token');
+            return value;
         } catch (error) {
-          // Error retrieving data
+            // Error retrieving data
         }
-//        return localStorage.getItem('token');
     }
 
 }

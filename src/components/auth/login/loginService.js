@@ -1,4 +1,3 @@
-//import {browserHistory} from 'react-router'; // ?????
 import NavigatorService from '../../../navigators/navigatorService';
 import { getCurrentUser } from './loginApi';
 import Auth from '../auth';
@@ -8,11 +7,9 @@ export let loginService = {
         if (data && data.token) {
             // save the token
             Auth.authenticateUser(data.token);
-            // change the current URL to /
-            //browserHistory.push('/'); // ?????
+            // navigate to Home
             NavigatorService.navigate('Home');
         }
-        //NavigatorService.navigate('Home');//////
     },
 
     redirectLoggedInUser() {
