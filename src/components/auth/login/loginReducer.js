@@ -38,23 +38,3 @@ function loginReducer(state = initState, action) {
 }
 
 export default loginReducer;
-
-/*
-function dashboard(state = initialDashboardState, action) {
-  let nextState;
-  switch (action.type) {
-  case 'Home':
-    nextState = AppNavigator.router.getStateForAction(
-      NavigationActions.back(),
-      state
-    );
-    break;
-  default:
-    // nextState = AppNavigator.router.getStateForAction(action, state);
-    nextState = state;
-    break;
-  }
-
-  return nextState || state;
-}
-*/
