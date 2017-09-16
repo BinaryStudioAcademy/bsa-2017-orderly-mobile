@@ -8,7 +8,9 @@ function setContainer(container: Object) {
 }
 
 function reset(routeName: string, params?: NavigationParams) {
-  _container.dispatch(
+  // ToDo: Test
+  ///_container.dispatch(
+  _container.props.navigation.dispatch(
     NavigationActions.reset({
       index: 0,
       actions: [
@@ -23,7 +25,9 @@ function reset(routeName: string, params?: NavigationParams) {
 }
 
 function navigate(routeName: string, params?: NavigationParams) {
-  _container.dispatch(
+  // Why this is not working???
+  ///_container.dispatch(
+  _container.props.navigation.dispatch(
     NavigationActions.navigate({
       type: 'Navigation/NAVIGATE',
       routeName,
@@ -33,7 +37,9 @@ function navigate(routeName: string, params?: NavigationParams) {
 }
 
 function navigateDeep(actions: { routeName: string, params?: NavigationParams }[]) {
-  _container.dispatch(
+  // ToDo: Test
+  ///_container.dispatch(
+  _container.props.navigation.dispatch(
     actions.reduceRight(
       (prevAction, action): any =>
         NavigationActions.navigate({
@@ -47,6 +53,7 @@ function navigateDeep(actions: { routeName: string, params?: NavigationParams }[
   );
 }
 
+// ToDo: Test
 function getCurrentRoute(): NavigationRoute | null {
   if (!_container || !_container.state.nav) {
     return null;

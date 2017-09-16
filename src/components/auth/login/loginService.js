@@ -12,6 +12,7 @@ export let loginService = {
             //browserHistory.push('/'); // ?????
             NavigatorService.navigate('Home');
         }
+        //NavigatorService.navigate('Home');//////
     },
 
     redirectLoggedInUser() {

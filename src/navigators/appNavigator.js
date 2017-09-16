@@ -6,6 +6,7 @@ import axios from 'axios';
 //import {browserHistory} from 'react-router';
 import LoginScreen from '../components/auth/login/loginScreen';
 import SignupScreen from '../components/auth/signUp/signupScreen';
+import Logout from '../components/auth/logout/logout';
 import HomeScreen from '../components/homeScreen/homeScreen';
 import ProfileScreen from '../components/profile/profileScreen';
 import DashboardScreen from '../components/dashboard/dashboardScreen';
@@ -16,6 +17,7 @@ import NavigatorService from './navigatorService';
 export const AppNavigator = StackNavigator({
     Login: { screen: LoginScreen },
     Signup: { screen: SignupScreen },
+    Logout: { screen: Logout },
     Home: { screen: HomeScreen },
     Profile: { screen: ProfileScreen },
     Dashboard: { screen: DashboardScreen }
@@ -23,9 +25,7 @@ export const AppNavigator = StackNavigator({
 
 const AppWithNavigationState = ({ dispatch, nav }) => (
     <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })}
-                  ref={navigatorRef => {
-                            NavigatorService.setContainer(navigatorRef);
-                       }}/>
+                  ref={navigatorRef => {NavigatorService.setContainer(navigatorRef);}}/>
 );
 
 AppWithNavigationState.propTypes = {

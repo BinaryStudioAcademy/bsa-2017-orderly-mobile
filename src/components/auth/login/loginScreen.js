@@ -7,6 +7,8 @@ import { NavigationActions } from 'react-navigation';
 import { Button, FormLabel, FormInput, Card, Icon } from 'react-native-elements';
 import R from 'ramda';
 import * as LoginActions from './loginActions';
+import { loginService } from './loginService';
+import NavigatorService from '../../../navigators/navigatorService';
 
 class LoginScreen extends Component {
 /*
@@ -55,10 +57,14 @@ class LoginScreen extends Component {
                 <Card>
                         {(!R.isEmpty(this.props.login.errors) ||
                         !this.props.login.success) &&
-                        <FormLabel style={styles.errorLabel}>
+                        <Text style={styles.errorLabel}>
                             {this.props.login.message}
-                        </FormLabel>}
+                        </Text>}
 
+                        {this.props.login.errors.email &&
+                        <Text style={styles.errorLabel}>
+                            {this.props.login.errors.email}
+                        </Text>}
                         <FormInput
                             placeholder="Email address..."
                             name="email"
@@ -67,11 +73,11 @@ class LoginScreen extends Component {
                             Icon={{name: 'mail'}}
                             onChange={(event) => this.changeUserData(event, 'email')}
                         />
-                        {this.props.login.errors.email &&
-                        <FormLabel style={styles.errorLabel}>
-                            {this.props.login.errors.email}
-                        </FormLabel>}
 
+                        {this.props.login.errors.password &&
+                        <Text style={styles.errorLabel}>
+                            {this.props.login.errors.password}
+                        </Text>}
                         <FormInput
                             name="password"
                             secureTextEntry
@@ -81,10 +87,6 @@ class LoginScreen extends Component {
                             Icon={{name: 'lock'}}
                             onChange={(event) => this.changeUserData(event, 'password')}
                         />
-                        {this.props.login.errors.password &&
-                        <FormLabel style={styles.errorLabel}>
-                            {this.props.login.errors.password}
-                        </FormLabel>}
 
                         <Button
                             style={styles.signInButton}
@@ -101,8 +103,7 @@ class LoginScreen extends Component {
                     <Button
                         style={styles.signUpButton}
                         backgroundColor="#ff7b00"
-                        onPress={() =>
-                            this.props.navigation.navigate('Signup')}
+                        onPress={() => NavigatorService.navigate('Signup')}
                         small
                         title="Sign up for free"
                     />
@@ -111,6 +112,7 @@ class LoginScreen extends Component {
         );
     }
 }
+////this.props.navigation.navigate('Signup')}
 /*
 LoginScreen.propTypes = {
     redirectLoggedInUser: PropTypes.func.isRequired,
@@ -166,7 +168,8 @@ const styles = StyleSheet.create({
         margin: 10,
     },
     errorLabel: {
-        backgroundColor: '#d73a49'
+        color: '#d73a49',
+        marginLeft: 19
     },
     signInButton: {
         marginTop: 20
