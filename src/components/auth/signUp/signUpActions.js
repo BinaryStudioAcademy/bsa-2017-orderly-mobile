@@ -3,7 +3,7 @@ export const CHANGE_USER_DATA = 'CHANGE_USER_DATA';
 export const SIGN_UP_PROCESS = 'SIGN_UP_PROCESS'; // ??????
 export const SIGN_UP_ERROR = 'SIGN_UP_ERROR';
 
-export function signUp(data) {
+export function performSignUp(data) {
     return {
         type: SIGN_UP_USER,
         firstName: data.firstName,
