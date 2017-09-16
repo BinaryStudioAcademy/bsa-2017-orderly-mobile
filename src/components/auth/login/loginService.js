@@ -19,7 +19,7 @@ export let loginService = {
         Auth.isUserAuthenticated().then(isUserAuthenticated => {
             if (isUserAuthenticated) {
                 getCurrentUser()
-                    .then(() => NavigatorService.navigate('Home')/*; browserHistory.push('/')*/) // ?????
+                    .then(() => NavigatorService.navigate('Home'))
                     .catch((error) => console.error(error));
             }
         });

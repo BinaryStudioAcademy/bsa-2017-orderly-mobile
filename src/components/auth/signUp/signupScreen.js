@@ -28,9 +28,9 @@ class SignupScreen extends Component {
         )
     };
     */
-    changeUserData(event) {
+    changeUserData(event, field) {
         this.props.changeUserData({
-                [event.target.name]: event.target.value
+                field: event.nativeEvent.text
             }
         )
     }
@@ -59,30 +59,34 @@ class SignupScreen extends Component {
                     <FormInput
                         placeholder="First Name..."
                         name="firstName"
-                        onChange={this.changeUserData}
+                        onChange={(event) => this.changeUserData(event, 'firstName')}
+                        defaultValue="joh"
                     />
                     <FormInput
                         placeholder="Last Name..."
                         name="lastName"
-                        onChange={this.changeUserData}
+                        onChange={(event) => this.changeUserData(event, 'lastName')}
+                        defaultValue="smit"
                     />
                     <FormInput
                         placeholder="Email address..."
                         name="email"
-                        onChange={this.changeUserData}
+                        onChange={(event) => this.changeUserData(event, 'email')}
+                        defaultValue="mail@mail.co"
                     />
                     <FormInput
                         secureTextEntry
                         placeholder="Password..."
                         name="password"
-                        onChange={this.changeUserData}
+                        onChange={(event) => this.changeUserData(event, 'password')}
+                        defaultValue="12345"
                     />
                     <Button
                         style={styles.signUpButton}
                         backgroundColor="#ff7b00"
                         title="Sign up for free"
                         //onPress={() => navigation.dispatch({ type: 'Login' })}
-                        onPress={this.processForm}
+                        onPress={(e) => this.processForm(e)}
                     />
                 </Card>
                 <View style={styles.signInBlock}>

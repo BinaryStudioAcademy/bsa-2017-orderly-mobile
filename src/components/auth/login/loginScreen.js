@@ -72,6 +72,7 @@ class LoginScreen extends Component {
                             iconLeft
                             Icon={{name: 'mail'}}
                             onChange={(event) => this.changeUserData(event, 'email')}
+                            defaultValue="mail@mail.co"
                         />
 
                         {this.props.login.errors.password &&
@@ -86,6 +87,7 @@ class LoginScreen extends Component {
                             iconLeft
                             Icon={{name: 'lock'}}
                             onChange={(event) => this.changeUserData(event, 'password')}
+                            defaultValue="12345"
                         />
 
                         <Button
@@ -93,7 +95,7 @@ class LoginScreen extends Component {
                             backgroundColor="#03A9F4"
                             title="Sign in"
                             //onPress={() => navigation.dispatch({ type: 'Login' })}
-                            onPress={this.processForm}
+                            onPress={(e) => this.processForm}
                         />
                 </Card>
                 <View style={styles.signUpBlock}>
