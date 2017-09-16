@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableHighlight } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { Icon } from 'react-native-elements';
 import LoginStatusMessage from './loginStatusMessage';
 import AuthButton from './authButton';
@@ -12,13 +12,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   logOutIcon: {
-    fontSize: 36
+    // fontSize: 36
   }
 });
 
 const HomeScreen = ({navigation}) => (
   <View style={styles.container}>
-    <TouchableHighlight
+    <View
         //onPress={() => navigation.navigate('Logout')}
         onPress={() => navigation.dispatch({ type: 'Logout' })}
     >
@@ -26,7 +26,7 @@ const HomeScreen = ({navigation}) => (
         <Text>
             Logout
         </Text>
-    </TouchableHighlight>
+    </View>
     <LoginStatusMessage />
     <AuthButton />
   </View>
