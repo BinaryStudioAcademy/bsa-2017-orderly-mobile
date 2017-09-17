@@ -1,28 +1,36 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { StyleSheet, Text, View, Button, Image, FlatList } from 'react-native';
-import { Icon } from 'react-native-elements';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {StyleSheet, Text, View, Button, Image, FlatList} from 'react-native';
+import {Icon} from 'react-native-elements';
+import {bindActionCreators} from 'redux';
+import * as dashboardActions from './dashboardActions'
 
 class Dashboard extends Component {
     static navigationOptions = ({navigation}) => {
         console.log(navigation);
         return {
-        title: navigation.state.params,
-        rightButtons: []
-    }};
+            title: navigation.dashboard.base.name,
+            icon: <Icon name='computer' size={30}/>,
+            leftButtons: [
+                {
+                    icon: <Icon name='computer' size={30}/>,
+                    id: 'baseIcon'
+                }
+            ],
+        }
+    };
 
     onSwitchTable = (tableId) => {
-        this.props.navigation.navigate()
+        this.props.switchTable(tableId);
     };
 
     constructor(props) {
         super(props);
-        this.state = {
-            baseName: '',
-        };
     }
-    
+
     render() {
+        console.log('DASHBOARD PROPS');
+        console.log(this.props);
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
@@ -34,11 +42,16 @@ class Dashboard extends Component {
                         <Image style={styles.headerUser} source={require('../../images/default-avatar.png')}/>
                     </View>
                 </View>
+                <Button
+                    title='Test'
+                    onPress={() => {this.onSwitchTable(123)}}
+                    accessibilityLabel="Learn more tooltip"
+                />
                 <FlatList
                     data={[
-                        {key: 'Devin', data: 'OK'},{key: 'Jackson'},{key: 'James'},{key: 'Joel'},{key: 'John'},{key: 'Jillian'},{key: 'Jimmy'},{key: 'Julie'},
-                        {key: 'Devin2'},{key: 'Jackson2'},{key: 'James2'},{key: 'Joel2'},{key: 'John2'},{key: 'Jillian2'},{key: 'Jimmy2'},{key: 'Julie2'},
-                        {key: 'Devin3'},{key: 'Jackson3'},{key: 'James3'},{key: 'Joel3'},{key: 'John3'},{key: 'Jillian3'},{key: 'Jimmy3'},{key: 'Julie3'},
+                        {key: 'Devin', data: 'OK'}, {key: 'Jackson'}, {key: 'James'}, {key: 'Joel'}, {key: 'John'}, {key: 'Jillian'}, {key: 'Jimmy'}, {key: 'Julie'},
+                        {key: 'Devin2'}, {key: 'Jackson2'}, {key: 'James2'}, {key: 'Joel2'}, {key: 'John2'}, {key: 'Jillian2'}, {key: 'Jimmy2'}, {key: 'Julie2'},
+                        {key: 'Devin3'}, {key: 'Jackson3'}, {key: 'James3'}, {key: 'Joel3'}, {key: 'John3'}, {key: 'Jillian3'}, {key: 'Jimmy3'}, {key: 'Julie3'},
                     ]}
                     renderItem={({item}) => <Text style={styles.item}>{item.key} {item.data || null}</Text>}
                 />
@@ -93,4 +106,8 @@ const mapStateToProps = (state) => ({
     dashboard: state.dashboard
 });
 
-export default connect(mapStateToProps)(Dashboard);
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(dashboardActions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     },
 });
 
-const LoginStatusMessage = ({ isLoggedIn, dispatch}) => {
+const LoginStatusMessage = ({ isLoggedIn, dispatch }) => {
     return (
         <View>
             <Text style={styles.welcome}>
@@ -24,8 +24,9 @@ const LoginStatusMessage = ({ isLoggedIn, dispatch}) => {
                 title="Profile"
             />
             <Button
-                onPress={() =>
-                    dispatch(NavigationActions.navigate({ routeName: 'Dashboard' }))}
+                onPress={() => {
+                    dispatch(NavigationActions.navigate({routeName: 'Dashboard'}));
+                }}
                 title="Dashboard"
             />
         </View>

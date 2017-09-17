@@ -1,24 +1,31 @@
 import { call, put, takeEvery} from 'redux-saga/effects';
 import * as dashboardApi from './dashboardApi';
-import NavigatorService from '../../navigators/navigatorService';
-import { SIGN_UP_USER } from "./dashboardActions";
+import * as actions from "./dashboardActions";
 
-function* fetchUser(action) {
+function* fetchBase(action) {
     try {
-        const signUp = yield call(signUpApi.fetchSignUp, action);
-        yield put({type: SIGN_UP_PROCESS, result: signUp});
-        if (!signUp.success) {
-            yield put({type: SIGN_UP_ERROR, errors: signUp.errors, message: signUp.message});
-        } else {
-            yield put({type: LOGIN_USER, email: action.email, password: action.password});
-        }
-    } catch (e) {
-        yield put({type: SIGN_UP_ERROR, message: e.message});
+        const payload = {};
+        payload.base = yield call(dashboardApi.getBase, action._id);
+        payload.tableId = payload.base.tables[0];
+        yield put({type: actions.GET_BASE_DONE, payload});
+    } catch (err) {
+        yield put({type: actions.GET_BASE_ERROR, message: err.message});
+    }
+}
+
+function* fetchTables(action) {
+    try {
+        const tables = yield call(dashboardApi.getTables, action.payload.base.tables);
+        yield put({type: actions.GET_TABLES_DONE, tables: tables});
+        yield put({type: actions.SWITCH_TABLE, tableId: action.payload.tableId});
+    } catch (err) {
+        yield put({type: actions.GET_TABLES_ERROR, message: err.message});
     }
 }
 
 function* dashboardSaga() {
-    yield takeEvery(SIGN_UP_USER, fetchUser);
+    yield takeEvery(actions.GET_BASE, fetchBase);
+    yield takeEvery(actions.GET_TABLES, fetchTables);
 }
 
 export default dashboardSaga;
