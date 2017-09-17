@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     },
 });
 
-const LoginStatusMessage = ({ isLoggedIn, dispatch }) => {
+const LoginStatusMessage = ({ isLoggedIn, dispatch}) => {
     return (
         <View>
             <Text style={styles.welcome}>

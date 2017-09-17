@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addNavigationHelpers, StackNavigator, NavigationActions } from 'react-navigation';
+import { addNavigationHelpers, StackNavigator} from 'react-navigation';
 import axios from 'axios';
-//import {browserHistory} from 'react-router';
 import LoginScreen from '../components/auth/login/loginScreen';
 import SignupScreen from '../components/auth/signUp/signupScreen';
 import Logout from '../components/auth/logout/logout';
@@ -25,7 +24,7 @@ export const AppNavigator = StackNavigator({
 
 const AppWithNavigationState = ({ dispatch, nav }) => (
     <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })}
-        ref={(navigatorRef) => {NavigatorService.setContainer(navigatorRef);}}/>
+        ref={(navigatorRef) => NavigatorService.setContainer(navigatorRef)}/>
 );
 
 AppWithNavigationState.propTypes = {

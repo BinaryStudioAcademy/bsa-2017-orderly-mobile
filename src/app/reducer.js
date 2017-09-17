@@ -3,11 +3,12 @@ import { NavigationActions } from 'react-navigation';
 import { AppNavigator } from '../navigators/appNavigator';
 import signUp from '../components/auth/signUp/signUpReducer';
 import login from '../components/auth/login/loginReducer';
+import dashboard from '../components/dashboard/dashboardReducer';
 
 // Start with two routes: The Home screen, with the Login screen on top.
 const firstAction = AppNavigator.router.getActionForPathAndParams('Home');
 const tempNavState = AppNavigator.router.getStateForAction(firstAction);
-const secondAction = AppNavigator.router.getActionForPathAndParams('Login');
+const secondAction = AppNavigator.router.getActionForPathAndParams('Dashboard');
 const initialNavState = AppNavigator.router.getStateForAction(
     secondAction,
     tempNavState
@@ -50,29 +51,6 @@ function auth(state = initialAuthState, action) {
     }
 }
 
-const initialDashboardState = {
-    base: {name: 'Clones', color: '#CCC', icon: 'computer'},
-    user: {name: 'Darth', ava: ''},
-};
-
-function dashboard(state = initialDashboardState, action) {
-    let nextState;
-    switch (action.type) {
-    case 'Home':
-        nextState = AppNavigator.router.getStateForAction(
-            NavigationActions.back(),
-            state
-        );
-        break;
-    default:
-        // nextState = AppNavigator.router.getStateForAction(action, state);
-        nextState = state;
-        break;
-    }
-    
-    return nextState || state;
-}
-
 const AppReducer = combineReducers({
     nav,
     auth,
@@ -80,12 +58,5 @@ const AppReducer = combineReducers({
     signUp,
     dashboard,
 });
-/*
-const rootReducer = (state, action) => {
-    if (action.type === LOGOUT) state = undefined
-    return appReducer(state, action)
-}
 
-export default rootReducer
-*/
 export default AppReducer;
