@@ -15,15 +15,10 @@ import ProfileScreen from '../components/profile/profileScreen';
 import DashboardScreen from '../components/dashboard/dashboardScreen';
 import TableScreen from '../components/dashboard/table/tableScreen';
 
-const TablesNavigator = TabNavigator({
+export const TablesNavigator = TabNavigator({
     Table: {screen: TableScreen}
 }, {
     tabBarPosition: 'bottom',
-});
-
-const DashBoardNavigator = StackNavigator({
-    Dashboard: {screen: DashboardScreen},
-    Tables: {screen: TablesNavigator},
 });
 
 export const AppNavigator = StackNavigator({
@@ -32,7 +27,7 @@ export const AppNavigator = StackNavigator({
     Logout: {screen: Logout},
     Home: {screen: HomeScreen},
     Profile: {screen: ProfileScreen},
-    Dashboard: {screen: DashBoardNavigator}
+    Dashboard: {screen: DashboardScreen}
 });
 
 const AppWithNavigationState = ({dispatch, nav, dashboard}) => (

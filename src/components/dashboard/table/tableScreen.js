@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {StyleSheet, Text, View, Button, Image, FlatList} from 'react-native';
+import {Text, View, Button, Image, FlatList} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import ESS from 'react-native-extended-stylesheet';
 import {bindActionCreators} from 'redux';
 import * as tableActions from './tableActions'
 
@@ -18,23 +19,26 @@ class Table extends Component {
         this.props.openRecord(recordId);
     };
 
+    data = [
+        {key: 'Devin', data: 'OK', recordId: 666}, {key: 'Jackson'}, {key: 'James'}, {key: 'Joel'}, {key: 'John'}, {key: 'Jillian'}, {key: 'Jimmy'}, {key: 'Julie'},
+        {key: 'Devin2'}, {key: 'Jackson2'}, {key: 'James2'}, {key: 'Joel2'}, {key: 'John2'}, {key: 'Jillian2'}, {key: 'Jimmy2'}, {key: 'Julie2'},
+        {key: 'Devin3'}, {key: 'Jackson3'}, {key: 'James3'}, {key: 'Joel3'}, {key: 'John3'}, {key: 'Jillian3'}, {key: 'Jimmy3'}, {key: 'Julie3'},
+    ];
+
     render() {
         console.log('TABLE PROPS');
         console.log(this.props);
         return (
             <View style={styles.container}>
                 <FlatList
-                    data={[
-                        {key: 'Devin', data: 'OK', recordId: 666}, {key: 'Jackson'}, {key: 'James'}, {key: 'Joel'}, {key: 'John'}, {key: 'Jillian'}, {key: 'Jimmy'}, {key: 'Julie'},
-                        {key: 'Devin2'}, {key: 'Jackson2'}, {key: 'James2'}, {key: 'Joel2'}, {key: 'John2'}, {key: 'Jillian2'}, {key: 'Jimmy2'}, {key: 'Julie2'},
-                        {key: 'Devin3'}, {key: 'Jackson3'}, {key: 'James3'}, {key: 'Joel3'}, {key: 'John3'}, {key: 'Jillian3'}, {key: 'Jimmy3'}, {key: 'Julie3'},
-                    ]}
-                    renderItem={({item}) => (
+                    style={styles.tableContent}
+                    data={this.data}
+                    renderItem={({item, index}) => (
                         <Text
-                            style={styles.item}
+                            style={ESS.child(styles, 'item', index, this.data.length)}
                             onPress={() => this.onOpenRecord(item.recordId || item.key)}
                         >
-                            {item.key} {item.data || null}
+                            {index}. {item.key} {item.data || null}
                         </Text>)
                     }
                 />
@@ -43,10 +47,13 @@ class Table extends Component {
     }
 }
 
-const styles = StyleSheet.create({
+const styles = ESS.create({
     container: {
         flex: 1,
         backgroundColor: '#EEE',
+    },
+    tableContent: {
+
     },
     item: {
         borderRadius: 10,
@@ -55,6 +62,10 @@ const styles = StyleSheet.create({
         fontSize: 17,
         margin: 5,
     },
+    'item:last-child': {
+        marginBottom: 60,
+        backgroundColor: '#F00',
+    }
 });
 
 function mapDispatchToProps(dispatch) {
