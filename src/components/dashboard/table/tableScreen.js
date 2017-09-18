@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Text, View, Button, Image, FlatList} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import ESS from 'react-native-extended-stylesheet';
 import {bindActionCreators} from 'redux';
 import * as tableActions from './tableActions'
+import ActionButton from 'react-native-action-button';
 
 class Table extends Component {
     static navigationOptions = ({navigation}) => {
@@ -25,6 +25,11 @@ class Table extends Component {
         {key: 'Devin3'}, {key: 'Jackson3'}, {key: 'James3'}, {key: 'Joel3'}, {key: 'John3'}, {key: 'Jillian3'}, {key: 'Jimmy3'}, {key: 'Julie3'},
     ];
 
+    onAddRecord = (tableId) => {
+        console.log('ADD RECORD BUTT');
+        console.log(tableId);
+    };
+
     render() {
         console.log('TABLE PROPS');
         console.log(this.props);
@@ -42,6 +47,10 @@ class Table extends Component {
                         </Text>)
                     }
                 />
+                <ActionButton
+                    buttonColor='rgba(40,130,255,1)'
+                    offsetY={15}
+                    onPress={() => this.onAddRecord(123)}/>
             </View>
         );
     }
@@ -50,21 +59,19 @@ class Table extends Component {
 const styles = ESS.create({
     container: {
         flex: 1,
-        backgroundColor: '#EEE',
+        backgroundColor: '#FFF',
     },
     tableContent: {
-
     },
     item: {
         borderRadius: 10,
-        backgroundColor: '#AAF',
-        padding: 5,
+        backgroundColor: '#DDD',
+        padding: 10,
         fontSize: 17,
         margin: 5,
     },
     'item:last-child': {
-        marginBottom: 60,
-        backgroundColor: '#F00',
+        marginBottom: 80,
     }
 });
 

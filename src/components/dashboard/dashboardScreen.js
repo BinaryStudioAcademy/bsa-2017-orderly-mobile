@@ -7,9 +7,10 @@ import * as dashboardActions from './dashboardActions'
 import {TablesNavigator} from '../../navigators/appNavigator';
 
 class Dashboard extends Component {
-    static navigationOptions = ({navigation}) => {
+    static navigationOptions = ({navigation, screenProps}) => {
         console.log('DASH NAV OPTIONS');
         console.log(navigation);
+        console.log(screenProps);
         return {
             title: navigation.dashboard.base.name,
             icon: <Icon name='cogs' size={30}/>,
@@ -25,13 +26,20 @@ class Dashboard extends Component {
         console.log(this.props);
         return (
             <View style={styles.container}>
-                <View style={styles.header}>
-                    <View style={styles.headerBase}>
-                        <View style={styles.baseTitle}>
-                            <Icon style={styles.baseIcon} name='cogs' size={30}/>
-                            <Text style={styles.baseName}>{this.props.navigation.dashboard.base.name}</Text>
+                <View style={styles.viewHeader}>
+                    <View style={styles.viewSelector}>
+                        <Icon style={styles.viewIcon} name='th' size={25}/>
+                        <Text style={styles.viewName}>Grid view</Text>
+                    </View>
+                    <View style={styles.viewControls}>
+                        <View style={styles.viewFilter}>
+                            <Icon style={styles.viewIcon} name='filter' size={20}/>
+                            <Text style={styles.controlsText}>Filter</Text>
                         </View>
-                        <Image style={styles.headerUser} source={require('../../images/default-avatar.png')}/>
+                        <View style={styles.viewSort}>
+                            <Icon style={styles.viewIcon} name='sort-amount-desc' size={18}/>
+                            <Text style={styles.controlsText}>Sort</Text>
+                        </View>
                     </View>
                 </View>
                 <TablesNavigator/>
@@ -43,45 +51,45 @@ class Dashboard extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#EEE',
+        backgroundColor: '#FFF',
     },
-    header: {
+    viewHeader: {
         height: 50,
-        marginBottom: 5,
-        backgroundColor: '#000',
-    },
-    headerBase: {
         alignItems: 'center',
         flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: 5,
         backgroundColor: '#AAA',
     },
-    baseTitle: {
-        flex: 1,
+    viewSelector: {
+        alignItems: 'baseline',
         flexDirection: 'row',
-        justifyContent: 'center',
+        paddingLeft: 10,
     },
-    baseIcon: {
-        alignSelf: 'center',
+    viewIcon: {
+        marginRight: 5,
+        color: '#000',
     },
-    headerHome: {
-        color: '#F00',
-    },
-    baseName: {
-        textAlign: 'center',
+    viewName: {
+        color: '#000',
         fontSize: 20,
-        margin: 5,
     },
-    headerUser: {
-        height: 50,
-        width: 50,
-        resizeMode: 'center',
+    viewControls: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        marginRight: 10,
     },
-    item: {
-        borderRadius: 10,
-        backgroundColor: '#AAF',
-        padding: 5,
-        fontSize: 17,
-        margin: 5,
+    viewFilter: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    viewSort: {
+        flexDirection: 'row',
+        marginLeft: 20,
+        alignItems: 'center',
+    },
+    controlsText: {
+        fontSize: 20,
     },
 });
 
