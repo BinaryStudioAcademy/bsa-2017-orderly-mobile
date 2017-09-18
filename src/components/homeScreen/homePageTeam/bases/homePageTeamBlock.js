@@ -18,7 +18,7 @@ class HomePageTeamBlock extends Component {
 		}
 		if (nextProps.teams && !R.equals(nextProps.teams, this.props.teams)) {
 			R.forEach( team => {
-				nextProps.getBasesByTeam(team._id)
+				return nextProps.getBasesByTeam(team._id)
 			})(nextProps.teams)
 		}
 	}

@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import ShareModal from './shareModal/shareModal';
+import { StyleSheet, View, Text } from 'react-native';
+//import ShareModal from './shareModal/shareModal';
 import Collaborators from './collaborators';
 
 const ShareBlock = ({team, collaborators, showUserPopup, isShowUserPopup, activeShareModal,
@@ -15,7 +15,7 @@ const ShareBlock = ({team, collaborators, showUserPopup, isShowUserPopup, active
 		               isShowUserPopup={isShowUserPopup}
 	                   showUserPopup={showUserPopup}
 		               team={team}/>
-		<View>SHARE</View>
+		<Text>SHARE</Text>
 
 	</View>
 )

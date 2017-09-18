@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, View, Image } from 'react-native';
+import { StyleSheet, View, Image, Text } from 'react-native';
 import avatar from '../../../../../images/avatar.png';
 import AppConfig from '../../../../../config';
 
@@ -15,13 +15,13 @@ class MemberInfo extends Component {
 				lastName: '',
 				email: '',
 			}
+			//<Image source={ collaborator.avatar ? `${AppConfig.host}/files/${collaborator.avatar}` : avatar}/>
 		return(
 			<View key={collaborator._id}>
-				<Image source={ collaborator.avatar ? `${AppConfig.host}/files/${collaborator.avatar}` : avatar}
-				     />
+				<Image source={avatar}/>
 				<View>
-					<View>{collaborator.firstName} {collaborator.lastName}</View>
-					<View>{collaborator.email}</View>
+					<Text>{collaborator.firstName} {collaborator.lastName}</Text>
+					<Text>{collaborator.email}</Text>
 				</View>
 			</View>
 		)

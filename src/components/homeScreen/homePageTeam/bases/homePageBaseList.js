@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import { StyleSheet, View, Image } from 'react-native';
+import { StyleSheet, View, Image, Text } from 'react-native';
 import BaseItem from './homePageBaseItem';
 import template from '../../../../images/template_gallery_icon.png'
 import scratch from '../../../../images/empty_template_icon.png'
-import ModalImportSpreadsheet from './baseImportPopUp'
+//import ModalImportSpreadsheet from './baseImportPopUp'
 
 let temporaryKey = 0;
 
@@ -69,12 +69,12 @@ class BaseList extends Component {
 								<View></View>
 								<View>
 									<Image source={template} />
-									<View>Start with a template</View>
+									<Text>Start with a template</Text>
 								</View>
-								//<ModalImportSpreadsheet teamId={this.props.teamId}/>
+
 								<View onClick={(event) => {props.onNewBaseClick('#234FED', props.teamId); this.handleClickOnMenu(event)}}>
 									<Image source={scratch} />
-									<View>Start from scratch</View>
+									<Text>Start from scratch</Text>
 								</View>
 							</View>
 						</View>
@@ -89,3 +89,5 @@ class BaseList extends Component {
 }
 
 export default BaseList
+
+//<ModalImportSpreadsheet teamId={this.props.teamId}/>

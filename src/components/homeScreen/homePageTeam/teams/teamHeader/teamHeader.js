@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import R from 'ramda';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import ShareBlock from './shareBlock';
 
 class TeamHeader extends Component {
@@ -25,7 +25,9 @@ class TeamHeader extends Component {
 					     setTimeout(() => {
 						     this.props.toggleTeamPopup(this.props.team._id, false)
 					     } , 3000)
-				     }}>{this.props.team.name}</View>
+				     }}>
+				        <Text>{this.props.team.name}</Text>
+				     </View>
 				<ShareBlock collaborators={this.props.collaborators}
 				            updateCollaboratorRole={this.props.updateCollaboratorRole}
 				            deleteCollaborator={this.props.deleteCollaborator}

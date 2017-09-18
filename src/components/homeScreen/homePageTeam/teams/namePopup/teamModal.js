@@ -6,7 +6,7 @@ import { ModalBody, renameInput } from './modalBody';
 
 const TeamModal = ({activeModal, setTeamModal, team, updateTeam, deleteTeam, currentClickedTeamId}) => (
 	<Modal className='team_modal'
-	       size='mini'
+
 	       onClose={() => { setTeamModal(''); }}
 	       open={Boolean(activeModal) && currentClickedTeamId === team._id}
 	       dimmer={false}>

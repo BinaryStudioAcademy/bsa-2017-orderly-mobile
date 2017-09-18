@@ -3,7 +3,7 @@ import { NavigationActions } from 'react-navigation';
 import { AppNavigator } from '../navigators/appNavigator';
 import signUp from '../components/auth/signUp/signUpReducer';
 import login from '../components/auth/login/loginReducer';
-import homeScreen from '../components/homeScreen/homePageReducer';
+import baseStore from '../components/homeScreen/homePageReducer';
 
 // Start with two routes: The Home screen, with the Login screen on top.
 const firstAction = AppNavigator.router.getActionForPathAndParams('Home');
@@ -56,7 +56,7 @@ const AppReducer = combineReducers({
     auth,
     login,
     signUp,
-    homeScreen
+    baseStore
 });
 /*
 const rootReducer = (state, action) => {

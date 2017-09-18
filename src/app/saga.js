@@ -4,7 +4,7 @@ import { all, fork } from 'redux-saga/effects';
 import signUpSaga from '../components/auth/signUp/signUpSaga';
 import loginSaga from '../components/auth/login/loginSaga';
 import logoutSaga from '../components/auth/logout/logoutSaga';
-import homeScreenSaga from '../components/homeScreen/homePageSaga';
+import homePageSaga from '../components/homeScreen/homePageSaga';
 //import forgotSaga from '../components/auth/forgot/forgotSaga';
 //import resetSaga from '../components/auth/reset/resetSaga';
 
@@ -13,7 +13,7 @@ export default function* root() {
         fork(signUpSaga),
         fork(loginSaga),
         fork(logoutSaga),
-        fork(homeScreenSaga)//,
+        fork(homePageSaga)//,
 //        fork(userProfileSaga),
 //        fork(dashboardSaga),
 //        fork(forgotSaga),

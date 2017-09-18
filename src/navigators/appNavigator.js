@@ -6,7 +6,7 @@ import axios from 'axios';
 import LoginScreen from '../components/auth/login/loginScreen';
 import SignupScreen from '../components/auth/signUp/signupScreen';
 import Logout from '../components/auth/logout/logout';
-import HomeScreen from '../components/homeScreen/homeScreen';//homePageConnect   //homeScreen
+import HomeScreen from '../components/homeScreen/homePageConnect';//homePageConnect   //homeScreen
 import ProfileScreen from '../components/profile/profileScreen';
 import DashboardScreen from '../components/dashboard/dashboardScreen';
 import Auth from '../components/auth/auth';

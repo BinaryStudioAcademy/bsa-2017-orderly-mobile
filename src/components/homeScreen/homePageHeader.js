@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableHighlight } from 'react-native';
 import { Icon } from 'react-native-elements';
+import NavigatorService from '../../navigators/navigatorService';
 
 let HomePageHeader = (props) => {
   return (
@@ -10,13 +11,17 @@ let HomePageHeader = (props) => {
         >
             <View>
                 <Icon name='exit-to-app' style={styles.logOutIcon}/>
-                <Text>
-                    Logout
-                </Text>
+                <View><Text>Logout</Text></View>
             </View>
         </TouchableHighlight>
     </View>
   )
 }
 
-export default HomePageHeader
+export default HomePageHeader;
+
+const styles = StyleSheet.create({
+    logOutIcon: {
+        //?????????
+    }
+});

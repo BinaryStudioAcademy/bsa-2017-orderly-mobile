@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { Icon } from 'react-native-elements';
 //import { browserHistory } from 'react-router';
 import R from 'ramda';
@@ -15,12 +15,12 @@ class BaseItem extends Component {
         return (
             <View>
                 <View>
-                    {this.props.base.name}
+                    <Text>{this.props.base.name}</Text>
                 </View>
                 <View>                
                     <View>
                         <View>
-                            <Icon inverted link    size='huge'
+                            <Icon
                                 onClick={() => {
                                         browserHistory.push(`/dashboard/${this.props.base._id}/${this.props.base.tables[0]}`)             // Todo: !!!!!!!!!!!!!!!!!!
                                         this.props.saveCurrentTeamRoles(R.mergeWith(R.merge, rolesObject, this.props.collaborators[this.props.teamId]))

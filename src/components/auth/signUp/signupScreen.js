@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableHighlight } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { Button, FormLabel, FormInput, Card, Icon } from 'react-native-elements';
 import R from 'ramda';
@@ -43,7 +43,7 @@ class SignupScreen extends Component {
                 <Text style={styles.instructions}>
                     Create an account
                 </Text>
-
+                <View style={styles.inputBlock}>
                     {this.props.signUp.errors.message &&
                     <Text style={styles.errorLabel}>
                         {this.props.signUp.errors.message}
@@ -57,7 +57,6 @@ class SignupScreen extends Component {
                         placeholder="First Name..."
                         name="firstName"
                         onChange={(event) => this.changeUserData(event, 'firstName')}
-                        defaultValue="joh"
                     />
 
                     {this.props.signUp.errors.lastName &&
@@ -68,7 +67,6 @@ class SignupScreen extends Component {
                         placeholder="Last Name..."
                         name="lastName"
                         onChange={(event) => this.changeUserData(event, 'lastName')}
-                        defaultValue="smit"
                     />
 
                     {this.props.signUp.errors.email &&
@@ -79,7 +77,6 @@ class SignupScreen extends Component {
                         placeholder="Email address..."
                         name="email"
                         onChange={(event) => this.changeUserData(event, 'email')}
-                        defaultValue="mail@mail.co"
                     />
 
                     {this.props.signUp.errors.password &&
@@ -91,28 +88,27 @@ class SignupScreen extends Component {
                         placeholder="Password..."
                         name="password"
                         onChange={(event) => this.changeUserData(event, 'password')}
-                        defaultValue="12345"
                     />
 
                     <Button
                         style={styles.signUpButton}
                         backgroundColor="#ff7b00"
-                        title="Sign up for free"
+                        title="Sign up"
                         onPress={(e) => this.processForm(e)}
                     />
 
-                <View style={styles.signInBlock}>
-                    <Text style={styles.text}>
-                        Already have an account?
-                    </Text>
-                    <Button
-                        style={styles.signInButton}
-                        backgroundColor="#03A9F4"
-                        onPress={() =>
-                            this.props.navigation.navigate('Login')}
-                        small
-                        title="Sign in"
-                    />
+                    <View style={styles.signInBlock}>
+                        <Text style={styles.text}>
+                            Already have an account?
+                        </Text>
+                        <Button
+                            style={styles.signInButton}
+                            backgroundColor="#03A9F4"
+                            onPress={() =>
+                                this.props.navigation.navigate('Login')}
+                            title="Sign in"
+                        />
+                    </View>
                 </View>
             </View>
         );
@@ -146,8 +142,8 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
         width: 137,
         height: 31,
-        margin: 14,
-        marginBottom: 0
+        marginTop: 10,
+        marginLeft: 19
     },
     header: {
         fontSize: 26,
@@ -161,7 +157,7 @@ const styles = StyleSheet.create({
     instructions: {
         alignSelf: 'flex-start',
         fontSize: 14,
-        marginLeft: 14
+        marginLeft: 19
     },
     namesBlock: {
         flex: 1,

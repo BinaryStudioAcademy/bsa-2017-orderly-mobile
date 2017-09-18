@@ -44,58 +44,56 @@ class LoginScreen extends Component {
                 <Text style={styles.header}>
                     Sign in
                 </Text>
+                <View style={styles.inputBlock}>
+                    {(!R.isEmpty(this.props.login.errors) ||
+                    !this.props.login.success) &&
+                    <Text style={styles.errorLabel}>
+                        {this.props.login.message}
+                    </Text>}
 
-                        {(!R.isEmpty(this.props.login.errors) ||
-                        !this.props.login.success) &&
-                        <Text style={styles.errorLabel}>
-                            {this.props.login.message}
-                        </Text>}
-
-                        {this.props.login.errors.email &&
-                        <Text style={styles.errorLabel}>
-                            {this.props.login.errors.email}
-                        </Text>}
-                        <FormInput
-                            placeholder="Email address..."
-                            name="email"
-                            small
-                            iconLeft
-                            Icon={{name: 'mail'}}
-                            onChange={(event) => this.changeUserData(event, 'email')}
-                        />
-
-                        {this.props.login.errors.password &&
-                        <Text style={styles.errorLabel}>
-                            {this.props.login.errors.password}
-                        </Text>}
-                        <FormInput
-                            name="password"
-                            secureTextEntry
-                            placeholder="Password..."
-                            small
-                            iconLeft
-                            Icon={{name: 'lock'}}
-                            onChange={(event) => this.changeUserData(event, 'password')}
-                        />
-
-                        <Button
-                            style={styles.signInButton}
-                            backgroundColor="#03A9F4"
-                            title="Sign in"
-                            onPress={this.processForm}
-                        />
-
-                <View style={styles.signUpBlock}>
-                    <Text style={styles.text}>
-                        Dont have an account?
-                    </Text>
-                    <Button
-                        style={styles.signUpButton}
-                        backgroundColor="#ff7b00"
-                        onPress={() => NavigatorService.navigate('Signup')}
-                        small
-                        title="Sign up for free"
+                    {this.props.login.errors.email &&
+                    <Text style={styles.errorLabel}>
+                        {this.props.login.errors.email}
+                    </Text>}
+                    <FormInput
+                        placeholder="Email address..."
+                        name="email"
+                        Icon={{name: 'mail'}}
+                        onChange={(event) => this.changeUserData(event, 'email')}
+                        defaultValue="mail@mail.co"
                     />
+
+                    {this.props.login.errors.password &&
+                    <Text style={styles.errorLabel}>
+                        {this.props.login.errors.password}
+                    </Text>}
+                    <FormInput
+                        name="password"
+                        secureTextEntry
+                        placeholder="Password..."
+                        Icon={{name: 'lock'}}
+                        onChange={(event) => this.changeUserData(event, 'password')}
+                        defaultValue="12345"
+                    />
+
+                    <Button
+                        style={styles.signInButton}
+                        backgroundColor="#03A9F4"
+                        title="Sign in"
+                        onPress={this.processForm}
+                    />
+                    <View style={styles.signUpBlock}>
+                        <Text style={styles.text}>
+                            Dont have an account?
+                        </Text>
+                        <Button
+                            style={styles.signUpButton}
+                            backgroundColor="#ff7b00"
+                            onPress={() => NavigatorService.navigate('Signup')}
+                            small
+                            title="Sign up for free"
+                        />
+                    </View>
                 </View>
             </View>
         );
