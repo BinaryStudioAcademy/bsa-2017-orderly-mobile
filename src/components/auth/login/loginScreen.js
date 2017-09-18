@@ -103,7 +103,7 @@ class LoginScreen extends Component {
 }
 
 LoginScreen.navigationOptions = {
-    title: 'Home page',
+    title: 'Home',
 };
 
 function mapStateToProps(state) {

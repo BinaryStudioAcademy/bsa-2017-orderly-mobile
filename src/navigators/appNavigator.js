@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addNavigationHelpers, StackNavigator, NavigationActions } from 'react-navigation';
 import axios from 'axios';
-//import {browserHistory} from 'react-router';
 import LoginScreen from '../components/auth/login/loginScreen';
 import SignupScreen from '../components/auth/signUp/signupScreen';
 import Logout from '../components/auth/logout/logout';
-import HomeScreen from '../components/homeScreen/homeScreen';
+import HomeScreen from '../components/homeScreen/homeScreen';//homePageConnect   //homeScreen
 import ProfileScreen from '../components/profile/profileScreen';
 import DashboardScreen from '../components/dashboard/dashboardScreen';
 import Auth from '../components/auth/auth';
@@ -58,8 +57,6 @@ export default connect(mapStateToProps)(AppWithNavigationState);
                     if (token) {
                         Auth.deauthenticateUser();
                     }
-                    //browserHistory.push('/login');
-                    //navigation.dispatch({ type: 'Login' })
                 });
                 NavigatorService.navigate('Login');
             }
