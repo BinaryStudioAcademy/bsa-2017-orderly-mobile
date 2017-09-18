@@ -16,8 +16,9 @@ export function getTables(baseId) {
 
 export function switchTable(tableId) {
     console.log('ACTION SWITCH TABLE');
+    console.log(tableId);
     return {
-        type: GET_TABLES,
+        type: SWITCH_TABLE,
         tableId: tableId,
     };
 }

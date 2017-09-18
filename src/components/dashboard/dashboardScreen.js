@@ -1,32 +1,23 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {StyleSheet, Text, View, Button, Image, FlatList} from 'react-native';
-import {Icon} from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import {bindActionCreators} from 'redux';
 import * as dashboardActions from './dashboardActions'
 
 class Dashboard extends Component {
     static navigationOptions = ({navigation}) => {
+        console.log('DASH NAV OPTIONS');
         console.log(navigation);
         return {
             title: navigation.dashboard.base.name,
-            icon: <Icon name='computer' size={30}/>,
-            leftButtons: [
-                {
-                    icon: <Icon name='computer' size={30}/>,
-                    id: 'baseIcon'
-                }
-            ],
+            icon: <Icon name='weixin' size={30}/>,
         }
     };
 
     onSwitchTable = (tableId) => {
         this.props.switchTable(tableId);
     };
-
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         console.log('DASHBOARD PROPS');
@@ -36,8 +27,8 @@ class Dashboard extends Component {
                 <View style={styles.header}>
                     <View style={styles.headerBase}>
                         <View style={styles.baseTitle}>
-                            <Icon type='font-awesome' name='cogs'/>
-                            <Text style={styles.baseName}>{this.props.dashboard.base.name} </Text>
+                            <Icon style={styles.baseIcon} name='cogs' size={30}/>
+                            <Text style={styles.baseName}>{this.props.navigation.dashboard.base.name} </Text>
                         </View>
                         <Image style={styles.headerUser} source={require('../../images/default-avatar.png')}/>
                     </View>
@@ -80,6 +71,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
     },
+    baseIcon: {
+        alignSelf: 'center',
+    },
     headerHome: {
         color: '#F00',
     },
@@ -102,12 +96,8 @@ const styles = StyleSheet.create({
     },
 });
 
-const mapStateToProps = (state) => ({
-    dashboard: state.dashboard
-});
-
 function mapDispatchToProps(dispatch) {
     return bindActionCreators(dashboardActions, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect(null, mapDispatchToProps)(Dashboard);
