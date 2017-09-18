@@ -1,5 +1,4 @@
-import { NavigationActions } from 'react-navigation';
-import type { NavigationParams, NavigationRoute } from 'react-navigation';
+import { NavigationActions, NavigationParams, NavigationRoute } from 'react-navigation';
 
 let _container; // eslint-disable-line
 
@@ -67,5 +66,5 @@ export default {
     navigateDeep,
     navigate,
     reset,
-    getCurrentRoute,
+    getCurrentRoute
 };

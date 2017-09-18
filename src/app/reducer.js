@@ -4,6 +4,7 @@ import { AppNavigator } from '../navigators/appNavigator';
 import signUp from '../components/auth/signUp/signUpReducer';
 import login from '../components/auth/login/loginReducer';
 import dashboard from '../components/dashboard/dashboardReducer';
+import homeScreen from '../components/homeScreen/homePageReducer';
 
 // Start with two routes: The Home screen, with the Login screen on top.
 const firstAction = AppNavigator.router.getActionForPathAndParams('Home');
@@ -33,7 +34,7 @@ function nav(state = initialNavState, action) {
         nextState = AppNavigator.router.getStateForAction(action, state);
         break;
     }
-    
+
     // Simply return the original `state` if `nextState` is null or undefined.
     return nextState || state;
 }
@@ -57,6 +58,7 @@ const AppReducer = combineReducers({
     login,
     signUp,
     dashboard,
+    homeScreen,
 });
 
 export default AppReducer;

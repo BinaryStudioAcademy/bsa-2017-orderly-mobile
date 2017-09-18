@@ -4,7 +4,7 @@ import dashboardSaga from '../components/dashboard/dashboardSaga';
 import signUpSaga from '../components/auth/signUp/signUpSaga';
 import loginSaga from '../components/auth/login/loginSaga';
 import logoutSaga from '../components/auth/logout/logoutSaga';
-//import homePageSaga from '../components/homePage/homePageSaga';
+import homeScreenSaga from '../components/homeScreen/homePageSaga';
 //import forgotSaga from '../components/auth/forgot/forgotSaga';
 //import resetSaga from '../components/auth/reset/resetSaga';
 
@@ -14,6 +14,7 @@ export default function* root() {
         fork(loginSaga),
         fork(logoutSaga),
         fork(dashboardSaga),
+        fork(homeScreenSaga),
         // fork(userProfileSaga),
         // fork(homePageSaga),
         // fork(forgotSaga),
