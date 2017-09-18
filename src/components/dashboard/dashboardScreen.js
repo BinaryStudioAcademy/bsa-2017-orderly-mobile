@@ -11,8 +11,8 @@ class Dashboard extends Component {
         console.log('DASH NAV OPTIONS');
         console.log(navigation);
         return {
-            title: 'OKBASE',//navigation.dashboard.base.name,
-            icon: <Icon name='weixin' size={30}/>,
+            title: navigation.dashboard.base.name,
+            icon: <Icon name='cogs' size={30}/>,
         }
     };
 
