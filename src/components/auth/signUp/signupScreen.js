@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
     signInBlock: {
-        alignSelf: 'flex-start'
+        alignSelf: 'center'
     },
     text: {
         fontSize: 18,
