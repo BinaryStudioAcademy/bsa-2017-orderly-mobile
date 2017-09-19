@@ -10,7 +10,6 @@ export default class Dashboard extends Component {
     this.state = {
       baseName: '',
     };
-    debugger;
   }
 
   render() {
