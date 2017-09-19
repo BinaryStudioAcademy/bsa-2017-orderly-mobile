@@ -18,7 +18,7 @@ class BaseItem extends Component {
                 <View>
                     <View style={styles.baseContainer}>
                         <TouchableOpacity
-                            style = {[{backgroundColor: `${this.props.base.color}` }, styles.baseIconContainer]}
+                            style = {[{backgroundColor: `${this.props.base.color || '#FFF'}`}, styles.baseIconContainer]}
                             onPress={() => NavigatorService.navigate('Dashboard', this.props.base)}>
                             <Icon
                                 style={styles.baseIcon}
