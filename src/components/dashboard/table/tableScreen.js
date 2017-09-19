@@ -15,6 +15,12 @@ class Table extends Component {
         }
     };
 
+    data = [
+        {key: 'Devin', data: 'OK', recordId: 666}, {key: 'Jackson'}, {key: 'James'}, {key: 'Joel'}, {key: 'John'}, {key: 'Jillian'}, {key: 'Jimmy'}, {key: 'Julie'},
+        {key: 'Devin2'}, {key: 'Jackson2'}, {key: 'James2'}, {key: 'Joel2'}, {key: 'John2'}, {key: 'Jillian2'}, {key: 'Jimmy2'}, {key: 'Julie2'},
+        {key: 'Devin3'}, {key: 'Jackson3'}, {key: 'James3'}, {key: 'Joel3'}, {key: 'John3'}, {key: 'Jillian3'}, {key: 'Jimmy3'}, {key: 'Julie3'},
+    ];
+
     onOpenRecord = (recordId) => {
         this.props.openRecord(recordId);
     };
@@ -31,7 +37,7 @@ class Table extends Component {
             <View style={styles.container}>
                 <FlatList
                     style={styles.tableContent}
-                    data={this.props}
+                    data={this.data}
                     renderItem={({item, index}) => (
                         <Text
                             style={ESS.child(styles, 'item', index, this.data.length)}

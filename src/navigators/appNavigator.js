@@ -10,13 +10,14 @@ import Auth from '../components/auth/auth';
 import SignupScreen from '../components/auth/signUp/signupScreen';
 import LoginScreen from '../components/auth/login/loginScreen';
 import Logout from '../components/auth/logout/logout';
-import HomeScreen from '../components/homeScreen/homePageConnect';//homePageConnect   //homeScreen
+import HomeScreen from '../components/homeScreen/homePageConnect';
 import ProfileScreen from '../components/profile/profileScreen';
 import DashboardScreen from '../components/dashboard/dashboardScreen';
 import TableScreen from '../components/dashboard/table/tableScreen';
 
 export const TablesNavigator = TabNavigator({
     Table: {screen: TableScreen},
+    Table2: {screen: TableScreen},
 }, {
     tabBarPosition: 'bottom',
 });
