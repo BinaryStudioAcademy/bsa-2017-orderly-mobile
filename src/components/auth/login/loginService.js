@@ -6,9 +6,7 @@ export let loginService = {
     login(data) {
         if (data && data.token) {
             // save the token
-            Auth.authenticateUser(data.token);
-            // navigate to Home
-            NavigatorService.navigate('Home');
+            Auth.authenticateUser(data.token).then(() => NavigatorService.navigate('Home'));
         }
     },
 

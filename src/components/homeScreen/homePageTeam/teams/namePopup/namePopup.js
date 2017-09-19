@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { Icon } from 'react-native-elements';
-import TeamModal from './teamModal';
+//import TeamModal from './teamModal';
 
 const hidingStyle = (popupIsShow, currentTeamId) => ({
 	display: popupIsShow.isShow && currentTeamId === popupIsShow.teamId ? 'block' : 'none'
@@ -16,22 +16,22 @@ const NamePopup = ({ teamPopupIsShow, setTeamModal,
 			           onClick={() => {
 			           	setTeamModal('settings')
 			}}>
-				<Icon name='more vert'/>
-				<View>Team settings</View>
+				<Icon name='more-vert'/>
+				<Text>Team settings</Text>
 			</View>
 			<View
 			           onClick={() => {
 				           setTeamModal('rename')
 			}}>
-				<Icon name='mode edit'/>
-				<View>Rename team</View>
+				<Icon name='mode-edit'/>
+				<Text>Rename team</Text>
 			</View>
 			<View
 			           onClick={() => {
 			           	setTeamModal('delete')
 			}}>
 				<Icon name='delete'/>
-				<View>Delete team</View>
+				<Text>Delete team</Text>
 			</View>
 		</View>
 

@@ -26,13 +26,7 @@ const TeamItem = (team, menu, handleClick, onNewBaseClick, toggleTeamPopup, team
 				            getCollaborators={getCollaborators}
 				            teamPopupIsShow={teamPopupIsShow}
 				            toggleTeamPopup={toggleTeamPopup} />
-				<NamePopup team={team}
-				           updateTeam={updateTeam}
-				           teamPopupIsShow={teamPopupIsShow}
-				           activeModal={activeModal}
-				           setTeamModal={setTeamModal}
-				           deleteTeam={deleteTeam}
-				           toggleTeamPopup={toggleTeamPopup} />
+
 				<BaseList handleClick={handleClick}
 				          saveCurrentTeamRoles={saveCurrentTeamRoles}
 				          team={team}
@@ -47,3 +41,13 @@ const TeamItem = (team, menu, handleClick, onNewBaseClick, toggleTeamPopup, team
 };
 
 export default TeamItem;
+/*
+<NamePopup team={team}
+				           updateTeam={updateTeam}
+				           teamPopupIsShow={teamPopupIsShow}
+				           activeModal={activeModal}
+				           setTeamModal={setTeamModal}
+				           deleteTeam={deleteTeam}
+				           toggleTeamPopup={toggleTeamPopup} />
+*/
+

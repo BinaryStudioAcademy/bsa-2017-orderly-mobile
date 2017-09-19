@@ -6,24 +6,20 @@ import { getTeamsByUser, getBasesByTeam, toggleTeamPopup,
 		getAllUsers, addCollaborator, deleteCollaborator,
 		updateCollaboratorRole, getCurrentUser, saveCurrentTeamRoles} from './homePageActions';
 
-HomeScreen.navigationOptions = {
-    title: 'Back to Login',
-};
-
 const mapStateToProps = (state) => {
+  let teamNames = [];
+  for (let team in state.baseStore.teams) {
+  teamNames.push({
+          value: state.baseStore.teams[team]._id,
+          label: state.baseStore.teams[team].name,
+      })
+  }
 
-let teamNames = [];
-for (let team in state.baseStore.teams) {
-teamNames.push({
-        value: state.baseStore.teams[team]._id,
-        label: state.baseStore.teams[team].name,
-    })
-}
-return ({
+  return ({
 	teamNames: teamNames,
     menu: state.baseStore.showMenuforBase,
-    user: state.userProfile.user,
-    avatar: state.userProfile.file,
+    user: state.baseStore.user,
+
 	teams: state.baseStore.teams,
 	teamPopupIsShow: state.baseStore.teamPopupIsShow,
 	activeModal: state.baseStore.activeModal,
@@ -33,7 +29,7 @@ return ({
 	allUsers: state.baseStore.allUsers
   });
 }
-
+//avatar: state.userProfile.file,
 const mapDispatchToProps = {
 	getUser: getCurrentUser,
 	getTeamsByUser: getTeamsByUser,
@@ -53,9 +49,13 @@ const mapDispatchToProps = {
 	saveCurrentTeamRoles: saveCurrentTeamRoles
 }
 
-const HomePage = connect(
+const HomeScreen = connect(
     mapStateToProps,
     mapDispatchToProps
 )(HomePageContainer);
 
-export default HomePage;
+HomeScreen.navigationOptions = {
+    title: 'Back to Login',
+};
+
+export default HomeScreen;

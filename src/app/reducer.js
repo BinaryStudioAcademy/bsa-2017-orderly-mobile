@@ -4,7 +4,7 @@ import { AppNavigator } from '../navigators/appNavigator';
 import signUp from '../components/auth/signUp/signUpReducer';
 import login from '../components/auth/login/loginReducer';
 import dashboard from '../components/dashboard/dashboardReducer';
-import homeScreen from '../components/homeScreen/homePageReducer';
+import baseStore from '../components/homeScreen/homePageReducer';
 
 const firstAction = AppNavigator.router.getActionForPathAndParams('Home');
 const initialNavState = AppNavigator.router.getStateForAction(firstAction);
@@ -51,7 +51,7 @@ const AppReducer = combineReducers({
     login,
     signUp,
     dashboard,
-    homeScreen,
+    baseStore
 });
 
 export default AppReducer;

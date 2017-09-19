@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, ScrollView } from 'react-native';
 import HomePageTeamBlock from './homePageTeam/bases/homePageTeamBlock';
 import HomePageHeader from './homePageHeader';
+import Auth from '../auth/auth';
 
 class HomePageContainer extends React.Component {
     constructor(props) {
@@ -9,12 +10,14 @@ class HomePageContainer extends React.Component {
     }
 
     componentWillMount() {
-        this.props.getUser();
+        Auth.getToken().then(token => {
+            this.props.getUser();
+        });
     }
 
     render() {
         return (
-            <View>
+            <ScrollView>
                 <HomePageHeader user={this.props.user}/>
                 <View>
                     <HomePageTeamBlock teams={this.props.teams}
@@ -46,7 +49,7 @@ class HomePageContainer extends React.Component {
                                        showMenu={this.props.showMenu}
                     />
                 </View>
-            </View>
+            </ScrollView>
         )
     }
 }

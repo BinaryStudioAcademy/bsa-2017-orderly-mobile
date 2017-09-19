@@ -15,8 +15,8 @@ class ModalDublicateBase extends React.Component {
 
     render() {
     return (
-      <Modal size='tiny' trigger={<li className = 'base-options-list-item'>
-                     <Icon name='copy' className='icon' color='black' size='small'/>
+      <Modal trigger={<li className = 'base-options-list-item'>
+                     <Icon name='copy' className='icon' color='black'    />
                         Duplicate base</li>} closeIcon>
         <Header icon={<Icon name='copy' color='blue'/>} content={`Duplicate ${this.props.base.name}`} />
         <Modal.Content>

@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import R from 'ramda';
-import { StyleSheet, View } from 'react-native';
-import { Icon } from 'react-native-elements';
-
+import { StyleSheet, View, Text, TouchableHighlight } from 'react-native';
 import TeamItem from './teamItem';
 
 
@@ -21,18 +19,33 @@ class TeamList extends Component {
 					this.props.activeShareModal, this.props.changeActiveShareModal, this.props.allUsers,
 					this.props.getAllUsers, this.props.addCollaborator, this.props.deleteCollaborator,
 					this.props.updateCollaboratorRole, this.props.saveCurrentTeamRoles, this.props.teamNames))(this.props.teams || []) }
-				<View>
-					<View
-					     onClick={() => {
+				<View style={styles.teamContainer}>
+					<TouchableHighlight
+					     onPress={() => {
 						      this.props.addNewTeam(this.props.user._id)
-					     }}><Icon name='plus one' size='small'/>Add new team</View>
-
+					     }}>
+                        <Text style={styles.teamName}>{'+ Add new team'.toUpperCase()}</Text>
+                    </TouchableHighlight>
 				</View>
 			</View>
 		)
 	}
 }
 
+export default TeamList;
 
-
-export default TeamList
+const styles = StyleSheet.create({
+    teamContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        padding: 15,
+        backgroundColor: '#d8d8d8',
+    },
+    teamName: {
+        fontFamily: 'notoserif',
+        fontSize: 16,
+        color: '#7b7b7b'
+    }
+});

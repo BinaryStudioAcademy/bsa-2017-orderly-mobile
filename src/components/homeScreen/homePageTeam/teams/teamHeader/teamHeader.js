@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import R from 'ramda';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
+import { Icon } from 'react-native-elements';
 import ShareBlock from './shareBlock';
 
 class TeamHeader extends Component {
@@ -16,17 +17,28 @@ class TeamHeader extends Component {
 
 	render() {
 		return (
-			<View>
-				<View
-				     onContextMenu={(event) => {
-					     event.stopPropagation();
-					     event.preventDefault();
-					     this.props.toggleTeamPopup(this.props.team._id, !this.props.teamPopupIsShow.isShow)
-					     setTimeout(() => {
-						     this.props.toggleTeamPopup(this.props.team._id, false)
-					     } , 3000)
-				     }}>{this.props.team.name}</View>
-				<ShareBlock collaborators={this.props.collaborators}
+            <View style={styles.teamContainer}
+                 /*onContextMenu={(event) => {
+                     event.stopPropagation();
+                     event.preventDefault();
+                     this.props.toggleTeamPopup(this.props.team._id, !this.props.teamPopupIsShow.isShow)
+                     setTimeout(() => {
+                         this.props.toggleTeamPopup(this.props.team._id, false)
+                     } , 3000)
+                 }}*/>
+                    <Text style={styles.teamName}>{this.props.team.name.toUpperCase()}</Text>
+                    <Icon name='mode-edit'
+                        onPress= {() => {
+                            //
+                    }}/>
+            </View>
+		)
+	}
+}
+
+export default TeamHeader;
+/*
+<ShareBlock collaborators={this.props.collaborators}
 				            updateCollaboratorRole={this.props.updateCollaboratorRole}
 				            deleteCollaborator={this.props.deleteCollaborator}
 				            addCollaborator={this.props.addCollaborator}
@@ -37,9 +49,20 @@ class TeamHeader extends Component {
 				            isShowUserPopup={this.props.isShowUserPopup}
 				            showUserPopup={this.props.showUserPopup}
 				            team={this.props.team}/>
-			</View>
-		)
-	}
-}
+*/
 
-export default TeamHeader;
+const styles = StyleSheet.create({
+    teamContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: 15,
+        backgroundColor: '#d8d8d8',
+    },
+    teamName: {
+        fontFamily: 'notoserif',
+        fontSize: 16,
+        color: '#7b7b7b'
+    }
+});
