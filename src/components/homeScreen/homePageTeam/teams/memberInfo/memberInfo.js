@@ -18,7 +18,7 @@ class MemberInfo extends Component {
 			//<Image source={ collaborator.avatar ? `${AppConfig.host}/files/${collaborator.avatar}` : avatar}/>
 		return(
 			<View key={collaborator._id}>
-				<Image source={avatar}/>
+				<Image style={{width: 30, height: 30}} source={avatar}/>
 				<View>
 					<Text>{collaborator.firstName} {collaborator.lastName}</Text>
 					<Text>{collaborator.email}</Text>

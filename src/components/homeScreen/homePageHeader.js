@@ -6,12 +6,11 @@ import NavigatorService from '../../navigators/navigatorService';
 let HomePageHeader = (props) => {
   return (
     <View>
-        <TouchableHighlight
+        <TouchableHighlight style={styles.logoutContainer}
             onPress={() => {NavigatorService.navigate('Logout')}}
         >
             <View>
-                <Icon name='exit-to-app' style={styles.logOutIcon}/>
-                <View><Text>Logout</Text></View>
+                <Icon name='exit-to-app'/>
             </View>
         </TouchableHighlight>
     </View>
@@ -21,7 +20,11 @@ let HomePageHeader = (props) => {
 export default HomePageHeader;
 
 const styles = StyleSheet.create({
-    logOutIcon: {
-        //?????????
+    logoutContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        padding: 15
     }
 });

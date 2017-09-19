@@ -23,7 +23,7 @@ onMouseOver={() => {
 const CollaboratorItem = (team, teamUser, collaborator, showUserPopup, isShowUserPopup) => {
 	if (collaborator) return (
 		<View key={teamUser.userId}>
-		    <Image source={avatar}/>
+		    <Image style={{width: 30, height: 30}} source={avatar}/>
 		    <View>
 			    <MemberInfo collaborator={collaborator} />
                 <View>

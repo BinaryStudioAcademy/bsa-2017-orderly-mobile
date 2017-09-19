@@ -141,7 +141,8 @@ const styles = StyleSheet.create({
         marginTop: 20
     },
     signUpBlock: {
-        alignSelf: 'flex-start'
+        marginTop: 40,
+        alignSelf: 'center'
     },
     text: {
         fontSize: 18,
@@ -149,7 +150,6 @@ const styles = StyleSheet.create({
         marginLeft: 14
     },
     signUpButton: {
-        alignSelf: 'flex-start',
-        color: 'white'
+        width: 100
     }
 });
