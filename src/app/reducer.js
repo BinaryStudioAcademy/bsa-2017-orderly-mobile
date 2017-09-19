@@ -6,14 +6,8 @@ import login from '../components/auth/login/loginReducer';
 import dashboard from '../components/dashboard/dashboardReducer';
 import homeScreen from '../components/homeScreen/homePageReducer';
 
-// Start with two routes: The Home screen, with the Login screen on top.
 const firstAction = AppNavigator.router.getActionForPathAndParams('Home');
-const tempNavState = AppNavigator.router.getStateForAction(firstAction);
-const secondAction = AppNavigator.router.getActionForPathAndParams('Dashboard');
-const initialNavState = AppNavigator.router.getStateForAction(
-    secondAction,
-    tempNavState
-);
+const initialNavState = AppNavigator.router.getStateForAction(firstAction);
 
 function nav(state = initialNavState, action) {
     let nextState;
@@ -35,7 +29,6 @@ function nav(state = initialNavState, action) {
         break;
     }
 
-    // Simply return the original `state` if `nextState` is null or undefined.
     return nextState || state;
 }
 

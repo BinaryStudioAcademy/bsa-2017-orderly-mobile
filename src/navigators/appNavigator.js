@@ -16,7 +16,7 @@ import DashboardScreen from '../components/dashboard/dashboardScreen';
 import TableScreen from '../components/dashboard/table/tableScreen';
 
 export const TablesNavigator = TabNavigator({
-    Table: {screen: TableScreen}
+    Table: {screen: TableScreen},
 }, {
     tabBarPosition: 'bottom',
 });

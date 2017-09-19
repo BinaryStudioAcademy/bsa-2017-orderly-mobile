@@ -19,12 +19,6 @@ class Table extends Component {
         this.props.openRecord(recordId);
     };
 
-    data = [
-        {key: 'Devin', data: 'OK', recordId: 666}, {key: 'Jackson'}, {key: 'James'}, {key: 'Joel'}, {key: 'John'}, {key: 'Jillian'}, {key: 'Jimmy'}, {key: 'Julie'},
-        {key: 'Devin2'}, {key: 'Jackson2'}, {key: 'James2'}, {key: 'Joel2'}, {key: 'John2'}, {key: 'Jillian2'}, {key: 'Jimmy2'}, {key: 'Julie2'},
-        {key: 'Devin3'}, {key: 'Jackson3'}, {key: 'James3'}, {key: 'Joel3'}, {key: 'John3'}, {key: 'Jillian3'}, {key: 'Jimmy3'}, {key: 'Julie3'},
-    ];
-
     onAddRecord = (tableId) => {
         console.log('ADD RECORD BUTT');
         console.log(tableId);
@@ -37,7 +31,7 @@ class Table extends Component {
             <View style={styles.container}>
                 <FlatList
                     style={styles.tableContent}
-                    data={this.data}
+                    data={this.props}
                     renderItem={({item, index}) => (
                         <Text
                             style={ESS.child(styles, 'item', index, this.data.length)}

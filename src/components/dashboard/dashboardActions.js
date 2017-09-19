@@ -6,11 +6,11 @@ export const GET_TABLES_DONE = 'GET_TABLES_DONE';
 export const GET_TABLES_ERROR = 'GET_TABLES_ERROR';
 export const SWITCH_TABLE = 'SWITCH_TABLE';
 
-export function getTables(baseId) {
+export function getTables(tablesId) {
     console.log('ACTION GET TABLES');
     return {
         type: GET_TABLES,
-        baseId: baseId,
+        tablesId: tablesId,
     };
 }
 

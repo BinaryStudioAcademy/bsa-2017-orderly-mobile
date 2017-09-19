@@ -7,15 +7,18 @@ import * as dashboardActions from './dashboardActions'
 import {TablesNavigator} from '../../navigators/appNavigator';
 
 class Dashboard extends Component {
-    static navigationOptions = ({navigation, screenProps}) => {
+    static navigationOptions = ({navigation}) => {
         console.log('DASH NAV OPTIONS');
         console.log(navigation);
-        console.log(screenProps);
         return {
             title: navigation.dashboard.base.name,
             icon: <Icon name='cogs' size={30}/>,
         }
     };
+
+    componentWillMount() {
+        this.props.getTables(["59bfa957c28c3c5a7f1f57fc"]);
+    }
 
     onSwitchTable = (tableId) => {
         this.props.switchTable(tableId);
@@ -24,6 +27,7 @@ class Dashboard extends Component {
     render() {
         console.log('DASHBOARD PROPS');
         console.log(this.props);
+        // if (!this.props.navigation.dashboard.tables.length) return(<Text>No data</Text>);
         return (
             <View style={styles.container}>
                 <View style={styles.viewHeader}>
@@ -42,7 +46,7 @@ class Dashboard extends Component {
                         </View>
                     </View>
                 </View>
-                <TablesNavigator/>
+                <TablesNavigator screenProps={{table: this.props.navigation.dashboard.tables[0]}}/>
             </View>
         );
     }

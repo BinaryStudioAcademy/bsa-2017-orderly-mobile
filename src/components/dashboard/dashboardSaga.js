@@ -15,9 +15,9 @@ function* fetchBase(action) {
 
 function* fetchTables(action) {
     try {
-        const tables = yield call(dashboardApi.getTables, action.payload.base.tables);
+        const tables = yield call(dashboardApi.getTables, action.tablesId);
         yield put({type: actions.GET_TABLES_DONE, tables: tables});
-        yield put({type: actions.SWITCH_TABLE, tableId: action.payload.tableId});
+        yield put({type: actions.SWITCH_TABLE, tableId: tables[0]._id});
     } catch (err) {
         yield put({type: actions.GET_TABLES_ERROR, message: err.message});
     }

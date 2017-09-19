@@ -1,15 +1,15 @@
 import axios from 'axios';
-const baseUrl = '/api/base/';
-const tableUrl = '/api/tables/';
+const baseUrl = '/api/base';
+const tableUrl = '/api/tables';
 
 export function getBase(baseId) {
-    return axios.get(baseUrl + baseId)
+    return axios.get(baseUrl + '/' + baseId)
         .then((response) => response.data)
         .catch((err) => err.data);
 }
 
 export function getTables(ids) {
-    return axios.get(`${tableUrl}/ids/`, ids.join(':'))
+    return axios.get(`${tableUrl}/ids/` + ids.join(':'))
         .then((response) => response.data)
         .catch((err) => err.data);
 }
