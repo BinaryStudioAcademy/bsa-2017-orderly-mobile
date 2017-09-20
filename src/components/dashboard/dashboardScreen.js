@@ -10,14 +10,22 @@ class Dashboard extends Component {
     static navigationOptions = ({navigation}) => {
         console.log('DASH NAV OPTIONS');
         console.log(navigation);
+        const {params} = navigation.state;
         return {
-            title: navigation.dashboard.base.name,
-            icon: <Icon name='cogs' size={30}/>,
+            headerStyle: {backgroundColor: params.color},
+            title: <NavHeader baseName={params.name} baseIcon={params.icon}/>,
         }
     };
 
     componentWillMount() {
-        this.props.getTables(["59bfa957c28c3c5a7f1f57fc"]);
+        console.log('WILL MOUNT');
+        console.log(this.props);
+        this.props.getTables(this.props.navigation.state.params.tables);
+    }
+
+    componentDidMount() {
+        console.log(this.props);
+        console.log('DID MOUNT');
     }
 
     onSwitchTable = (tableId) => {
@@ -27,10 +35,10 @@ class Dashboard extends Component {
     render() {
         console.log('DASHBOARD PROPS');
         console.log(this.props);
-        // if (!this.props.navigation.dashboard.tables.length) return(<Text>No data</Text>);
+        const base = this.props.navigation.state.params;
         return (
             <View style={styles.container}>
-                <View style={styles.viewHeader}>
+                <View style={[styles.viewHeader, {backgroundColor: base.color, opacity: 0.8}]}>
                     <View style={styles.viewSelector}>
                         <Icon style={styles.viewIcon} name='th' size={25}/>
                         <Text style={styles.viewName}>Grid view</Text>
@@ -46,7 +54,9 @@ class Dashboard extends Component {
                         </View>
                     </View>
                 </View>
-                <TablesNavigator screenProps={{table: this.props.navigation.dashboard.tables[0]}}/>
+                {this.props.dashboard.tables[0] &&
+                    <TablesNavigator screenProps={{table: this.props.dashboard.tables[0]}}/>
+                }
             </View>
         );
     }
@@ -62,7 +72,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginBottom: 5,
         backgroundColor: '#AAA',
     },
     viewSelector: {
@@ -94,11 +103,28 @@ const styles = StyleSheet.create({
     },
     controlsText: {
         fontSize: 20,
+        color: '#000',
     },
 });
+
+const NavHeader = ({baseName, baseIcon}) => {
+    return (
+        <Text>
+            <Icon name={baseIcon} size={25}/>
+            <Text>  </Text>
+            {baseName}
+        </Text>
+    )
+};
+
+const mapStateToProps = (state) => {
+    return {
+        dashboard: state.dashboard,
+    }
+};
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators(dashboardActions, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

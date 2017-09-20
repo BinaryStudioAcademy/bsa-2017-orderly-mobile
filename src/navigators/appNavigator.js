@@ -31,12 +31,11 @@ export const AppNavigator = StackNavigator({
     Dashboard: {screen: DashboardScreen}
 });
 
-const AppWithNavigationState = ({dispatch, nav, dashboard}) => (
+const AppWithNavigationState = ({dispatch, nav}) => (
     <AppNavigator
         navigation={addNavigationHelpers({
             dispatch,
             state: nav,
-            dashboard: dashboard
         })}
         ref={(navigatorRef) => NavigatorService.setContainer(navigatorRef)}/>
 );
@@ -44,12 +43,10 @@ const AppWithNavigationState = ({dispatch, nav, dashboard}) => (
 AppWithNavigationState.propTypes = {
     dispatch: PropTypes.func.isRequired,
     nav: PropTypes.object.isRequired,
-    dashboard: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
     nav: state.nav,
-    dashboard: state.dashboard
 });
 
 export default connect(mapStateToProps)(AppWithNavigationState);

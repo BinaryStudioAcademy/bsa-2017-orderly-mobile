@@ -11,15 +11,24 @@ class Table extends Component {
         console.log('TABLE NAV OPTIONS');
         console.log(navigation);
         return {
+            tintColor: '#FAA',
             title: 'A TABLE',
+            headerStyle: {
+                color: '#AAF',
+            },
+            tabBarOptions: {
+                activeTintColor: '#AAA',
+                inactiveTintColor: '#000',
+                labelStyle: {
+                    fontSize: 2,
+                },
+                style: {
+                    backgroundColor: '#EAF',
+                }
+
+            }
         }
     };
-
-    data = [
-        {key: 'Devin', data: 'OK', recordId: 666}, {key: 'Jackson'}, {key: 'James'}, {key: 'Joel'}, {key: 'John'}, {key: 'Jillian'}, {key: 'Jimmy'}, {key: 'Julie'},
-        {key: 'Devin2'}, {key: 'Jackson2'}, {key: 'James2'}, {key: 'Joel2'}, {key: 'John2'}, {key: 'Jillian2'}, {key: 'Jimmy2'}, {key: 'Julie2'},
-        {key: 'Devin3'}, {key: 'Jackson3'}, {key: 'James3'}, {key: 'Joel3'}, {key: 'John3'}, {key: 'Jillian3'}, {key: 'Jimmy3'}, {key: 'Julie3'},
-    ];
 
     onOpenRecord = (recordId) => {
         this.props.openRecord(recordId);
@@ -31,20 +40,35 @@ class Table extends Component {
     };
 
     render() {
+        const {table} = this.props.screenProps;
         console.log('TABLE PROPS');
         console.log(this.props);
         return (
             <View style={styles.container}>
                 <FlatList
                     style={styles.tableContent}
-                    data={this.data}
+                    data={table.records}
+                    keyExtractor={(record) => record._id}
                     renderItem={({item, index}) => (
-                        <Text
-                            style={ESS.child(styles, 'item', index, this.data.length)}
-                            onPress={() => this.onOpenRecord(item.recordId || item.key)}
+                        <View
+                            style={ESS.child(styles, 'record', index, table.records.length)}
+                            onPress={() => this.onOpenRecord(item._id)}
                         >
-                            {index}. {item.key} {item.data || null}
-                        </Text>)
+                            {item.record_data.slice(0,4).map((record, index) =>
+                                (<View key={record._id}
+                                       style={ESS.child(styles, 'recordContainer', index, item.record_data.length)}
+                                       onPress={() => this.onOpenRecord(item._id)}
+                                >
+                                    <Text style={styles.fieldName}>
+                                        {index !== 0 &&
+                                        table.fields[index].name}
+                                    </Text>
+                                    <Text style={ESS.child(styles, 'recordName', index, item.record_data.length)}>
+                                        {record.data || (index === 0 ? 'Unnamed record' : '')}
+                                    </Text>
+                                </View>)
+                            )}
+                        </View>)
                     }
                 />
                 <ActionButton
@@ -59,19 +83,43 @@ class Table extends Component {
 const styles = ESS.create({
     container: {
         flex: 1,
-        backgroundColor: '#FFF',
+        backgroundColor: '#DDD',
     },
     tableContent: {
     },
-    item: {
-        borderRadius: 10,
-        backgroundColor: '#DDD',
-        padding: 10,
-        fontSize: 17,
-        margin: 5,
+    record: {
+        borderRadius: 5,
+        backgroundColor: '#FFF',
+        padding: 5,
+        margin: 15,
+        marginBottom: 0,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        elevation: 1,
     },
-    'item:last-child': {
-        marginBottom: 80,
+    'record:last-child': {
+        marginBottom: 85,
+    },
+    primaryField: {
+        fontSize: 20,
+        color: '#000'
+    },
+    recordContainer: {
+        padding: 4,
+        margin: 4,
+        // borderColor: 'rgba(0,0,0,0.8)',
+        // borderRadius: 4,
+        // borderWidth: 1,
+    },
+    'recordContainer:first-child': {
+        width: '98%',
+    },
+    'recordName:first-child': {
+        fontSize: 20,
+        color: '#000',
+    },
+    fieldName: {
+
     }
 });
 
