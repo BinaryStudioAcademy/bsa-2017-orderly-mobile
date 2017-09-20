@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import R from 'ramda';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { Icon } from 'react-native-elements';
+import NavigatorService from '../../../../../navigators/navigatorService';
 import ShareBlock from './shareBlock';
 
 class TeamHeader extends Component {
@@ -27,10 +28,11 @@ class TeamHeader extends Component {
                      } , 3000)
                  }}*/>
                     <Text style={styles.teamName}>{this.props.team.name.toUpperCase()}</Text>
-                    <Icon name='mode-edit'
-                        onPress= {() => {
-                            //
-                    }}/>
+                    <TouchableOpacity>
+                        <Icon name='mode-edit'
+                            style={styles.teamEditIcon}
+                            onPress={() => NavigatorService.navigate('EditTeamScreen', {id: this.props.team._id, name: this.props.team.name})}/>
+                    </TouchableOpacity>
             </View>
 		)
 	}

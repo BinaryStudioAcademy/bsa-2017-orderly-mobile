@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import { StyleSheet, View, Image, Text, TouchableHighlight } from 'react-native';
+import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native';
 import BaseItem from './homePageBaseItem';
-import template from '../../../../images/template_gallery_icon.png'
-import scratch from '../../../../images/empty_template_icon.png'
 //import ModalImportSpreadsheet from './baseImportPopUp'
+import Prompt from 'react-native-prompt';
 
 let temporaryKey = 0;
 
@@ -11,64 +10,53 @@ class BaseList extends Component {
 	constructor(props) {
 		super(props)
 		this.state ={
-			showMewnu: false,
-			modalClass: false
+			promptVisible: false
 		}
-		this.handleClickOnMenu = this.handleClickOnMenu.bind(this);
-    	this.handleOutsideClick = this.handleOutsideClick.bind(this);
 	}
-  	handleClickOnMenu(event) {
-	    if (!this.state.showMewnu) {
-	      document.addEventListener('click', this.handleOutsideClick, false);     // Todo: ????
-	    } else {
-	      document.removeEventListener('click', this.handleOutsideClick, false);  // Todo: ????
-	    }
 
-	     if (this.refs.createBase) {
-	      this.setState(prevState => ({
-	         showMewnu: !prevState.showMewnu
-	      }));
-	    }
-  	}
-	handleOutsideClick(e) {
-	    if ( event.target.closest(".addBasePopover") === null) {                  // Todo: ????
-	      if (this.node) {
-	        if (this.node.contains(e.target)) {                                   // Todo: ????
-	          return;
-	        }
-	      }
-	    this.handleClickOnMenu();
-	    }
-  	}
 	render() {
 		const props = this.props
 		if (this.props.bases) {
 			return (
 				<View>
-                        { this.props.bases && this.props.bases.map(function (base) {
-                            return (
-                                <View key={base._id || ++temporaryKey}>
-                                    <BaseItem
-                                              handleClick={props.handleClick}
-                                              teamId={props.teamId}
-                                              collaborators={props.collaborators}
-                                              saveCurrentTeamRoles={props.saveCurrentTeamRoles}
-                                              team={props.team}
-                                              base={base}
-                                              menu={props.menu}
-                                              teamNames={props.teamNames}
-                                    />
-                                </View>
-                            )
-                        })
-                        }
-					<View style={styles.baseContainer}>
-                        <TouchableHighlight style = {styles.baseIconContainer}
-                            onPress={(event) => {props.onNewBaseClick('#234FED', props.teamId)/*; this.handleClickOnMenu(event)*/}}>
+                    { this.props.bases && this.props.bases.map(function (base) {
+                        return (
+                            <View key={base._id || ++temporaryKey}>
+                                <BaseItem
+                                          handleClick={props.handleClick}
+                                          teamId={props.teamId}
+                                          collaborators={props.collaborators}
+                                          saveCurrentTeamRoles={props.saveCurrentTeamRoles}
+                                          team={props.team}
+                                          base={base}
+                                          menu={props.menu}
+                                          teamNames={props.teamNames}
+                                />
+                            </View>
+                        )
+                    })}
+					<TouchableOpacity style={styles.baseContainer}
+					    onPress={(event) => this.setState({promptVisible: true})/*props.onNewBaseClick('#234FED', props.teamId)*/}>
+                        <View style = {styles.baseIconContainer}>
                             <Text style={styles.baseIcon}>+</Text>
-                        </TouchableHighlight>
+                        </View>
+                        <Prompt
+                             title="Please, enter Base name"
+                             placeholder="Base name"
+                             defaultValue="New base"
+                             visible={ this.state.promptVisible }
+                             onCancel={ () => this.setState({
+                               promptVisible: false
+                             }) }
+                             onSubmit={ (value) => {
+                                 props.onNewBaseClick('#234FED', props.teamId, value);
+                                 this.setState({
+                                    promptVisible: false
+                                 })
+                             }}
+                        />
                         <Text style={styles.baseName}>Add New Base</Text>
-                    </View>
+                    </TouchableOpacity>
 				 </View>
 			)
 		} else {
@@ -77,8 +65,8 @@ class BaseList extends Component {
 
 	}
 }
-
-export default BaseList
+//<PromptCreateNewBase promptVisible={this.state.promptVisible} teamId={props.teamId}/>
+export default BaseList;
 
 //<ModalImportSpreadsheet teamId={this.props.teamId}/>
 

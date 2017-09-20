@@ -4,8 +4,8 @@ import AppConfig from '../../config';
 
 const url = `${AppConfig.host}/api`;
 
-const addBaseToTeam = (teamId) =>
-	axios.post(url + '/team/' + teamId + '/base')
+const addBaseToTeam = (teamId, name) =>
+	axios.post(url + '/team/' + teamId + '/base', {name: name})
 		.then((response) => response.data)
 		.catch(R.tap(console.error));
 
@@ -78,14 +78,14 @@ const updateCollaboratorRole = ({ teamId, userId, role }) =>
 		.catch(R.tap(console.error))
 
 const addTeam = (userId) =>
-	axios.post(url + '/team/', { owner: userId,
-											collaborators: [
-												{
-													userId: userId,
-													role: 'owner'
-												}
-											]
-										})
+	axios.post(url + '/team/', {owner: userId,
+                                collaborators: [
+                                    {
+                                        userId: userId,
+                                        role: 'owner'
+                                    }
+                                ],
+                                name: name})
 		.then((response) => response.data)
 		.catch(R.tap(console.error))
 

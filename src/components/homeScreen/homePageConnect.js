@@ -55,7 +55,7 @@ const HomeScreen = connect(
 )(HomePageContainer);
 
 HomeScreen.navigationOptions = {
-    title: 'Back to Login',
-};
-
+    title: 'Home Screen',
+    header: null
+}
 export default HomeScreen;

@@ -116,7 +116,7 @@ class SignupScreen extends Component {
 }
 
 SignupScreen.navigationOptions = {
-    title: 'Login',
+    title: 'Sign up'
 };
 
 function mapStateToProps(state) {

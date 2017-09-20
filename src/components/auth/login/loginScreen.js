@@ -60,7 +60,6 @@ class LoginScreen extends Component {
                         name="email"
                         Icon={{name: 'mail'}}
                         onChange={(event) => this.changeUserData(event, 'email')}
-                        defaultValue="mail@mail.co"
                     />
 
                     {this.props.login.errors.password &&
@@ -73,7 +72,6 @@ class LoginScreen extends Component {
                         placeholder="Password..."
                         Icon={{name: 'lock'}}
                         onChange={(event) => this.changeUserData(event, 'password')}
-                        defaultValue="12345"
                     />
 
                     <Button
@@ -101,7 +99,8 @@ class LoginScreen extends Component {
 }
 
 LoginScreen.navigationOptions = {
-    title: 'Home',
+    title: 'Sign in',
+    header: null
 };
 
 function mapStateToProps(state) {

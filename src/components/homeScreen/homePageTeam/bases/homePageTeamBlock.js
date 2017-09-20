@@ -73,8 +73,8 @@ const mapDispatchToProps = (dispatch) => {
 			}
 		},
 
-		onNewBaseClick: (color, teamId) => {
-			dispatch(addNewBase(teamId))
+		onNewBaseClick: (color, teamId, name) => {
+			dispatch(addNewBase(teamId, name))
 		},
 	}
 }

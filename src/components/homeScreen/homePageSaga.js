@@ -19,7 +19,7 @@ function* gettingBasesByTeam(action) {
 
 function* addingBase(action) {
     try {
-        const team = yield call(addBaseToTeam, action.teamId);
+        const team = yield call(addBaseToTeam, action.teamId, action.name);
         yield put({ type: 'ADD_NEW_BASE_TO_TEAM_SUCCEEDED', team: team });
     } catch (err) {
         yield put({ type: 'ADD_NEW_BASE_TO_TEAM_FAILED', message: err.message});
@@ -102,7 +102,7 @@ function* deletingTeam(action) {
 
 function* addingTeam(action) {
 	try {
-		const addedTeam = yield call(addTeam, action.userId);
+		const addedTeam = yield call(addTeam, action.userId, action.name);
 		yield put({ type: 'ADD_NEW_TEAM_SUCCEEDED', team: addedTeam});
 	} catch (err) {
 		yield put({ type: 'ADD_NEW_TEAM_FAILED', message: err.message });

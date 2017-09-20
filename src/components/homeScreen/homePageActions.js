@@ -1,7 +1,8 @@
-export const addNewBase = (teamId) => {
+export const addNewBase = (teamId, name) => {
   return {
     type: 'ADD_NEW_BASE',
-	teamId: teamId
+	teamId: teamId,
+	name: name
   }
 }
 
@@ -69,10 +70,11 @@ export const setTeamModal = (typeOfActivity) => {
 	}
 }
 
-export const addNewTeam = (userId) => {
+export const addNewTeam = (userId, name) => {
 	return {
 		type: 'ADD_NEW_TEAM',
-		userId: userId
+		userId: userId,
+		name: name
 	}
 }
 

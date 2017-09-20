@@ -16,23 +16,19 @@ class BaseItem extends Component {
         return (
             <View>
                 <View>
-                    <View style={styles.baseContainer}>
-                        <TouchableOpacity
-                            style = {[{backgroundColor: `${this.props.base.color}` }, styles.baseIconContainer]}
-                            onPress={() => NavigatorService.navigate('Dashboard', this.props.base)}>
+                    <TouchableOpacity style={styles.baseContainer}
+                        onPress={() => NavigatorService.navigate('Dashboard', this.props.base)}>
+                        <View
+                            style = {[{backgroundColor: `${this.props.base.color}` }, styles.baseIconContainer]}>
                             <Icon
                                 style={styles.baseIcon}
-                                onClick={() => {
-                                        browserHistory.push(`/dashboard/${this.props.base._id}/${this.props.base.tables[0]}`)             // Todo: !!!!!!!!!!!!!!!!!!
-                                        this.props.saveCurrentTeamRoles(R.mergeWith(R.merge, rolesObject, this.props.collaborators[this.props.teamId]))
-                                }}
-                                name='home'//{this.props.base.icon}
+                                name='home'//{this.props.base.icon}                                                    // Todo: Add base Icons !!!!!!!!!!!!!!!
                             />
-                        </TouchableOpacity>
+                        </View>
                         <View>
                             <Text style={styles.baseName}>{this.props.base.name}</Text>
                         </View>
-                    </View>
+                    </TouchableOpacity>
                 </View>
             </View>
         )

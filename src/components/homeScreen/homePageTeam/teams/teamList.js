@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
 import R from 'ramda';
-import { StyleSheet, View, Text, TouchableHighlight } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import Prompt from 'react-native-prompt';
 import TeamItem from './teamItem';
-
-
 
 class TeamList extends Component {
 	constructor(props) {
 		super(props);
+        this.state ={
+            promptVisible: false
+        }
 	}
 	render() {
 		return (
@@ -19,14 +21,28 @@ class TeamList extends Component {
 					this.props.activeShareModal, this.props.changeActiveShareModal, this.props.allUsers,
 					this.props.getAllUsers, this.props.addCollaborator, this.props.deleteCollaborator,
 					this.props.updateCollaboratorRole, this.props.saveCurrentTeamRoles, this.props.teamNames))(this.props.teams || []) }
-				<View style={styles.teamContainer}>
-					<TouchableHighlight
-					     onPress={() => {
-						      this.props.addNewTeam(this.props.user._id)
-					     }}>
-                        <Text style={styles.teamName}>{'+ Add new team'.toUpperCase()}</Text>
-                    </TouchableHighlight>
-				</View>
+				<TouchableOpacity style={styles.teamContainer}
+				    onPress={(event) => this.setState({promptVisible: true})}//onPress={() => {this.props.addNewTeam(this.props.user._id)}}
+				    >
+					<View>
+                        <Text style={styles.teamName}>{'+  Add new team'.toUpperCase()}</Text>
+                    </View>
+                    <Prompt
+                         title="Please, enter Team name"
+                         placeholder="Team name"
+                         defaultValue="New team"
+                         visible={ this.state.promptVisible }
+                         onCancel={ () => this.setState({
+                           promptVisible: false
+                         }) }
+                         onSubmit={ (value) => {
+                             this.props.addNewTeam(this.props.user._id, value);
+                             this.setState({
+                                promptVisible: false
+                             })
+                         }}
+                    />
+				</TouchableOpacity>
 			</View>
 		)
 	}
@@ -46,6 +62,7 @@ const styles = StyleSheet.create({
     teamName: {
         fontFamily: 'notoserif',
         fontSize: 16,
-        color: '#7b7b7b'
+        color: '#7b7b7b',
+        fontWeight: '500'
     }
 });

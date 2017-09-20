@@ -6,7 +6,8 @@ import axios from 'axios';
 import LoginScreen from '../components/auth/login/loginScreen';
 import SignupScreen from '../components/auth/signUp/signupScreen';
 import Logout from '../components/auth/logout/logout';
-import HomeScreen from '../components/homeScreen/homePageConnect';//homePageConnect   //homeScreen
+import HomeScreen from '../components/homeScreen/homePageConnect';
+import EditTeamScreen from '../components/homeScreen/homePageTeam/teams/team/editTeamScreen';
 import ProfileScreen from '../components/profile/profileScreen';
 import DashboardScreen from '../components/dashboard/dashboardScreen';
 import Auth from '../components/auth/auth';
@@ -19,8 +20,11 @@ export const AppNavigator = StackNavigator({
     Logout: { screen: Logout },
     Home: { screen: HomeScreen },
     Profile: { screen: ProfileScreen },
-    Dashboard: { screen: DashboardScreen }
-});
+    Dashboard: { screen: DashboardScreen },
+    EditTeamScreen: { screen: EditTeamScreen }
+},
+    { headerMode: 'screen' }
+);
 
 const AppWithNavigationState = ({ dispatch, nav }) => (
     <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })}
