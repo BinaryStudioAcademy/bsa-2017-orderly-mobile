@@ -27,7 +27,7 @@ export default class Dashboard extends Component {
               <Icon name='book'/>
               <Text style={styles.baseName}>{this.state.baseName || 'Default'}</Text>
             </View>
-            <Image style={styles.headerUser} source={require('../../images/default-avatar.png')}/>
+            <Image style={[styles.headerUser, {width: 30, height: 30}]} source={require('../../images/default-avatar.png')}/>
           </View>
         </View>
         <FlatList
