@@ -1,5 +1,5 @@
 import { all, fork } from 'redux-saga/effects';
-//import userProfileSaga from '../components/userProfile/userProfileSaga';
+import userProfileSaga from '../components/userProfile/userProfileSaga';
 //import dashboardSaga from '../components/dashboard/dashboardSaga';
 import signUpSaga from '../components/auth/signUp/signUpSaga';
 import loginSaga from '../components/auth/login/loginSaga';
@@ -13,8 +13,8 @@ export default function* root() {
         fork(signUpSaga),
         fork(loginSaga),
         fork(logoutSaga),
-        fork(homePageSaga)//,
-//        fork(userProfileSaga),
+        fork(homePageSaga),
+        fork(userProfileSaga),
 //        fork(dashboardSaga),
 //        fork(forgotSaga),
 //        fork(resetSaga),

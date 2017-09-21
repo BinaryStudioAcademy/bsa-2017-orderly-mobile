@@ -1,40 +1,52 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
-import { Icon } from 'react-native-elements';
-import NavigatorService from '../../navigators/navigatorService';
+import { Component, ScrollView, StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
+import Icon from 'react-native-vector-icons/dist/FontAwesome';
+import PropTypes from 'prop-types';
 
-let HomePageHeader = (props) => {
-  return (
-    <View style={styles.headerContainer}>
-        <Image style={styles.image} source={require('../../images/logo.png')} ></Image>
-        <TouchableOpacity style={styles.logoutContainer}
-            onPress={() => {NavigatorService.navigate('Logout')}}
-        >
-            <Icon name='exit-to-app'/>
-        </TouchableOpacity>
-    </View>
-  )
+class HomePageHeader extends React.Component {
+	constructor(props) {
+		super(props)
+	}
+
+    static contextTypes = {
+        drawer: PropTypes.object.isRequired
+    };
+
+    render() {
+        return (
+            <View style={styles.headerContainer}>
+                <TouchableOpacity style={styles.mainControlPanelButton} onPress={this.context.drawer.toggle}>
+                    <Icon name='bars' style={styles.menuButton}/>
+                </TouchableOpacity>
+                <Image style={styles.image} source={require('../../images/logo.png')} ></Image>
+                <View style={styles.menuNotButton}/>
+            </View>
+        )
+    }
 }
 
 export default HomePageHeader;
 
 const styles = StyleSheet.create({
     headerContainer: {
-        flex: 1,
+        flex: 0,
         flexDirection: 'row',
         justifyContent: 'space-between',
+        alignItems: 'center',
+        backgroundColor: 'rgb(250, 250, 250)'
     },
     image: {
+        alignSelf: 'center',
         width: 137,
         height: 31,
-        marginLeft: 15,
-        marginTop: 15
+        marginBottom: 7,
+        marginTop: 7
     },
-    logoutContainer: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-        padding: 15
+    menuButton: {
+        fontSize: 24,
+        paddingLeft: 10
+    },
+    menuNotButton: {
+        width: 16
     }
 });

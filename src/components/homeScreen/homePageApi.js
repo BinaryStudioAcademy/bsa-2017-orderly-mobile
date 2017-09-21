@@ -77,15 +77,16 @@ const updateCollaboratorRole = ({ teamId, userId, role }) =>
 		.then(response => response.data)
 		.catch(R.tap(console.error))
 
-const addTeam = (userId) =>
-	axios.post(url + '/team/', {owner: userId,
+const addTeam = (userId, name) =>
+    axios.post(url + '/team/', {owner: userId,
                                 collaborators: [
                                     {
                                         userId: userId,
                                         role: 'owner'
                                     }
                                 ],
-                                name: name})
+                                name: name
+										})
 		.then((response) => response.data)
 		.catch(R.tap(console.error))
 

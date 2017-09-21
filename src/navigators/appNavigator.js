@@ -8,7 +8,7 @@ import SignupScreen from '../components/auth/signUp/signupScreen';
 import Logout from '../components/auth/logout/logout';
 import HomeScreen from '../components/homeScreen/homePageConnect';
 import EditTeamScreen from '../components/homeScreen/homePageTeam/teams/team/editTeamScreen';
-import ProfileScreen from '../components/profile/profileScreen';
+import UserProfileScreen from '../components/userProfile/userProfileScreen';
 import DashboardScreen from '../components/dashboard/dashboardScreen';
 import Auth from '../components/auth/auth';
 import AppConfig from '../config';
@@ -19,7 +19,7 @@ export const AppNavigator = StackNavigator({
     Signup: { screen: SignupScreen },
     Logout: { screen: Logout },
     Home: { screen: HomeScreen },
-    Profile: { screen: ProfileScreen },
+    UserProfile: { screen: UserProfileScreen },
     Dashboard: { screen: DashboardScreen },
     EditTeamScreen: { screen: EditTeamScreen }
 },

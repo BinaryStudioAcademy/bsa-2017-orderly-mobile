@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, TouchableHighlight, TouchableOpacity } from 'react-native';
-import { Icon } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/dist/FontAwesome';
 //import { browserHistory } from 'react-router';
 import R from 'ramda';
 import NavigatorService from '../../../../navigators/navigatorService';
 import ContextMenuIcon from '../../../contextMenu/contextMenuIcon';
 import { createRolesObject } from '../../homePageService';
+import { baseIcons } from '../../../configuration/baseIcons'
 
 class BaseItem extends Component {
     constructor(props) {
@@ -18,13 +19,14 @@ class BaseItem extends Component {
                 <View>
                     <TouchableOpacity style={styles.baseContainer}
                         onPress={() => NavigatorService.navigate('Dashboard', this.props.base)}>
+                        {this.props.base.color &&
                         <View
                             style = {[{backgroundColor: `${this.props.base.color}` }, styles.baseIconContainer]}>
                             <Icon
                                 style={styles.baseIcon}
-                                name='home'//{this.props.base.icon}                                                    // Todo: Add base Icons !!!!!!!!!!!!!!!
+                                name={baseIcons[this.props.base.icon]}
                             />
-                        </View>
+                        </View>}
                         <View>
                             <Text style={styles.baseName}>{this.props.base.name}</Text>
                         </View>
@@ -71,7 +73,9 @@ const styles = StyleSheet.create({
         height: 40
     },
     baseIcon: {
-        alignSelf: 'center'
+        alignSelf: 'center',
+        fontSize: 22,
+        fontWeight: '600'
     },
     baseName: {
         fontFamily: 'Roboto',

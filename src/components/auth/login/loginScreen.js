@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { NavigationActions } from 'react-navigation';
-import { Button, FormLabel, FormInput, Card, Icon } from 'react-native-elements';
+import { Button, FormLabel, FormInput, Card, Icon, FormValidationMessage } from 'react-native-elements';
 import R from 'ramda';
 import * as LoginActions from './loginActions';
 import { loginService } from './loginService';
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
         margin: 10
     },
     errorLabel: {
-        color: '#d73a49',
+        color: '#ff0000',
         marginLeft: 19
     },
     signInButton: {
