@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity, Image, Picker } from 'react-n
 import { Button, FormInput, Card, Icon } from 'react-native-elements';
 import { DatePickerDialog } from 'react-native-datepicker-dialog';
 import './date.js' ;
+import NavigatorService from '../../../navigators/navigatorService';
 
 class UserProfileForm extends React.Component {
     constructor(props) {
@@ -29,14 +30,20 @@ class UserProfileForm extends React.Component {
             country: nextProps.user.country ? nextProps.user.country : '',
             city: nextProps.user.city ? nextProps.user.city : '',
             address: nextProps.user.address ? nextProps.user.address : '',
-            phone: nextProps.user.phone ? nextProps.user.phone : ''
+            phone: nextProps.user.phone ? '' + nextProps.user.phone : ''
         });
     }
 
     handleSubmit(e) {
         const formData = {};
         for (const field in this.refs) {
-            formData[field] = this.refs[field].props.value;
+            if (this.props.user.hasOwnProperty(field)) {
+                if (this.refs[field] instanceof Picker) {
+                    formData[field] = this.refs[field].props.selectedValue;
+                } else {
+                    formData[field] = this.refs[field].props.value;
+                }
+            }
         }
         this.props.handleSubmitForm(this.props.user._id, formData);
     }
@@ -55,7 +62,7 @@ class UserProfileForm extends React.Component {
         }
 
         //To open the dialog
-        this.refs.birthday.open({
+        this.refs.birthdayDialog.open({
             birthday: birthday,
             maxDate: new Date() //To restirct future date
         });
@@ -67,9 +74,11 @@ class UserProfileForm extends React.Component {
    */
     onDOBDatePicked = (date) => {
         this.setState({
-            birthday: date//,
+            birthday: date ? new Date(Date.parse(date)).customFormat( "#YYYY#-#MM#-#DD#" ) : ''
+            //birthday: date,
             //dobText: moment(date).format('DD-MMM-YYYY')
         });
+        this.refs.birthday = {props : {value: date}};
     }
 
     render() {
@@ -79,14 +88,14 @@ class UserProfileForm extends React.Component {
 
                         <View style={styles.formInputBlock}>
                             <Text style={styles.formInputLabel}>First name</Text>
-                            <FormInput style={styles.userProfileFormInput} ref='firstName' placeholder='First name'
+                            <FormInput style={styles.userProfileFormInput} ref='firstName' placeholder='First name' underlineColorAndroid='transparent'
                                 onChange = {(e) => this.setState({ firstName: e.nativeEvent.text})}
                                 value={this.state.firstName}    />
                         </View>
 
                         <View style={styles.formInputBlock}>
                             <Text style={styles.formInputLabel}>Last name</Text>
-                            <FormInput style={styles.userProfileFormInput} ref='lastName'    placeholder='Last name'
+                            <FormInput style={styles.userProfileFormInput} ref='lastName'    placeholder='Last name' underlineColorAndroid='transparent'
                                 onChange = {(e) => this.setState({ lastName: e.nativeEvent.text})}
                                 value={this.state.lastName}    />
                         </View>
@@ -120,14 +129,14 @@ class UserProfileForm extends React.Component {
 
                         <View style={styles.formInputBlock}>
                             <Text style={styles.formInputLabel}>Country</Text>
-                            <FormInput style={styles.userProfileFormInput} ref='country' placeholder='Country'
+                            <FormInput style={styles.userProfileFormInput} ref='country' placeholder='Country' underlineColorAndroid='transparent'
                                 onChange = {(e) => this.setState({ country: e.nativeEvent.text})}
                                 value={this.state.country} />
                         </View>
 
                         <View style={styles.formInputBlock}>
                             <Text style={styles.formInputLabel}>City</Text>
-                            <FormInput style={styles.userProfileFormInput} ref='city' placeholder='City'
+                            <FormInput style={styles.userProfileFormInput} ref='city' placeholder='City' underlineColorAndroid='transparent'
                                 onChange = {(e) => this.setState({ city: e.nativeEvent.text})}
                                 value={this.state.city} />
                         </View>
@@ -135,14 +144,14 @@ class UserProfileForm extends React.Component {
 
                         <View style={styles.formInputBlock}>
                             <Text style={styles.formInputLabel}>Address</Text>
-                            <FormInput style={styles.userProfileFormInput} ref='address' placeholder='Address'
+                            <FormInput style={styles.userProfileFormInput} ref='address' placeholder='Address' underlineColorAndroid='transparent'
                                 onChange = {(e) => this.setState({ address: e.nativeEvent.text})}
                                 value={this.state.address} />
                         </View>
 
                         <View style={styles.formInputBlock}>
                             <Text style={styles.formInputLabel}>Phone</Text>
-                            <FormInput style={styles.userProfileFormInput} ref='phone' placeholder='Phone'
+                            <FormInput style={styles.userProfileFormInput} ref='phone' placeholder='Phone' underlineColorAndroid='transparent'
                                 onChange = {(e) => this.setState({ phone: e.nativeEvent.text})}
                                 value={this.state.phone} />
                         </View>
@@ -153,10 +162,10 @@ class UserProfileForm extends React.Component {
                     buttonStyle={{backgroundColor: "#03A9F4", borderRadius: 4}}
                     textStyle={{textAlign: 'center', fontSize: 20}}
                     title="Save"
-                    onPress={this.handleSubmit}>Update Data</Button>
+                    onPress= {() => {this.handleSubmit(); return NavigatorService.navigate('Home')}}/>
             </View>
           </View>
-           <DatePickerDialog ref="birthday" onDatePicked={this.onDOBDatePicked.bind(this)} />
+           <DatePickerDialog ref="birthdayDialog" onDatePicked={this.onDOBDatePicked.bind(this)} />
 
         </View>
         )

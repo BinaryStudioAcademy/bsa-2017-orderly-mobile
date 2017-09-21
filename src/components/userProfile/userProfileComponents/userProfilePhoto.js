@@ -6,12 +6,14 @@ import avatar from '../../../images/avatar.png';
 import AppConfig from '../../../config';
 
 class UserProfilePhoto extends React.Component {
-constructor(props) {
-    super(props);
-    this.props = props; 
-    this.state = {
-            avatar: ''
-        }  
+    constructor(props) {
+        super(props);
+        this.props = props;
+        this.state = {
+            avatar: null
+        };
+
+        this.handleFile = this.handleFile.bind(this);
     }
 
     selectPhotoTapped() {
@@ -25,50 +27,45 @@ constructor(props) {
         };
 
         ImagePicker.showImagePicker(options, (response) => {
-          console.log('Response = ', response);
+            console.log('Response = ', response);
 
-          if (response.didCancel) {
-            console.log('User cancelled photo picker');
-          }
-          else if (response.error) {
-            console.log('ImagePicker Error: ', response.error);
-          }
-          else if (response.customButton) {
-            console.log('User tapped custom button: ', response.customButton);
-          }
-          else {
-            let source = { uri: response.uri };                                                     // ToDo: ???????????????????
-
-            // You can also display the image using data:
-            // let source = { uri: 'data:image/jpeg;base64,' + response.data };
-
-            this.setState({
-              avatar: source
-            });
-          }
+            if (response.didCancel) {
+                console.log('User cancelled photo picker');
+            }
+            else if (response.error) {
+                console.log('ImagePicker Error: ', response.error);
+            }
+            else if (response.customButton) {
+                console.log('User tapped custom button: ', response.customButton);
+            }
+            else {
+                response.name = response.fileName;
+                this.handleFile(response);
+            }
         });
-      }
-
-    componentWillReceiveProps(nextProps) {
-        this.setState({
-        avatar: nextProps.user.avatar ? nextProps.user.avatar : ''
-        })
     }
 
-    handleFile = (event) => {
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.user) {
+            this.setState({
+                avatar: nextProps.user.avatar ? {uri: `${AppConfig.host}/files/${nextProps.user.avatar}`} : ''
+            });
+        }
+    }
+
+    handleFile = (file) => {
         let hasExtension = (inputID, exts) => {
-            return (new RegExp('(' + exts.join('|').replace(/\./g, '\\.') + ')$')).test(event.target.files[0].name);
+            return (new RegExp('(' + exts.join('|').replace(/\./g, '\\.') + ')$')).test(file.fileName);
         }
         
-        let file = event.target.files[0];
         const data = new FormData();
-        data.append('file', event.target.files[0]);
+        data.append('file', file);
         data.append('userId', this.props.user._id)
 
         if (file.size > 2097152 ) {
             alert ('please upload the photo with the size less than 2MB')
         } else if (!hasExtension(file, ['.jpg', '.gif', '.png'])) {
-            alert("Sorry, " + event.target.files[0].name + " is invalid, allowed extensions are: .jpg, .png, and .gif");
+            alert("Sorry, " + file.fileName + " is invalid, allowed extensions are: .jpg, .png, and .gif");
         } else {
             this.props.handleFile(data);
         }
@@ -86,7 +83,7 @@ constructor(props) {
                         { this.state.avatar === null ? <Text>Select a Photo</Text> :
                             <Image
                                 style={styles.avatar}
-                                source={this.state.avatar == '' ? `${AppConfig.host}/files/${this.props.user.avatar}` : avatar} />
+                                source={(this.state.avatar == '') ? avatar : this.state.avatar} />
                         }
                         </View>
                     </TouchableOpacity>
