@@ -3,31 +3,17 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start --reset-cache",
+    "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest"
   },
   "dependencies": {
-    "axios": "^0.16.2",
-    "prop-types": "^15.5.10",
-    "ramda": "^0.24.1",
     "react": "16.0.0-alpha.12",
-    "react-file-input": "^0.2.5",
     "react-native": "0.48.2",
-    "react-native-datepicker-dialog": "0.0.6",
-    "react-native-drawer": "^2.5.0",
-    "react-native-elements": "^0.16.0",
-    "react-native-icons": "^0.7.1",
-    "react-native-image-picker": "^0.26.7",
-    "react-native-prompt": "^1.0.0",
-    "react-native-vector-icons": "^4.4.0",
-    "react-navigation": "^1.0.0-beta.11",
-    "react-redux": "^5.0.6",
-    "redux": "^3.7.2",
-    "redux-saga": "^0.15.6"
+    "react-navigation": "^1.0.0-beta.11"
   },
   "devDependencies": {
     "babel-jest": "21.0.2",
-    "babel-preset-react-native": "^2.0.0",
+    "babel-preset-react-native": "3.0.2",
     "jest": "21.0.2",
     "react-test-renderer": "16.0.0-alpha.12"
   },
