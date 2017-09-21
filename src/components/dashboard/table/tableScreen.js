@@ -1,42 +1,30 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Text, View, Button, Image, FlatList} from 'react-native';
+import {Text, View, Button, Image, FlatList, TouchableHighlight} from 'react-native';
 import ESS from 'react-native-extended-stylesheet';
 import {bindActionCreators} from 'redux';
-import * as tableActions from './tableActions'
+import * as tableActions from './tableActions';
 import ActionButton from 'react-native-action-button';
 
 class Table extends Component {
     static navigationOptions = ({navigation}) => {
-        console.log('TABLE NAV OPTIONS');
-        console.log(navigation);
         return {
-            tintColor: '#FAA',
             title: 'A TABLE',
-            headerStyle: {
-                color: '#AAF',
-            },
-            tabBarOptions: {
-                activeTintColor: '#AAA',
-                inactiveTintColor: '#000',
-                labelStyle: {
-                    fontSize: 2,
-                },
-                style: {
-                    backgroundColor: '#EAF',
-                }
-
-            }
         }
+    };
+
+    onAddRecord = (tableId) => {
+        this.props.addRecord(tableId);
     };
 
     onOpenRecord = (recordId) => {
         this.props.openRecord(recordId);
     };
 
-    onAddRecord = (tableId) => {
-        console.log('ADD RECORD BUTT');
-        console.log(tableId);
+    onRemoveRecord = (tableId, recordId) => {
+        console.log('IN SCREEn');
+        console.log(tableId, recordId);
+        this.props.removeRecord(tableId, recordId);
     };
 
     render() {
@@ -50,31 +38,36 @@ class Table extends Component {
                     data={table.records}
                     keyExtractor={(record) => record._id}
                     renderItem={({item, index}) => (
-                        <View
-                            style={ESS.child(styles, 'record', index, table.records.length)}
-                            onPress={() => this.onOpenRecord(item._id)}
-                        >
-                            {item.record_data.slice(0,4).map((record, index) =>
-                                (<View key={record._id}
-                                       style={ESS.child(styles, 'recordContainer', index, item.record_data.length)}
-                                       onPress={() => this.onOpenRecord(item._id)}
-                                >
-                                    <Text style={styles.fieldName}>
-                                        {index !== 0 &&
-                                        table.fields[index].name}
-                                    </Text>
-                                    <Text style={ESS.child(styles, 'recordName', index, item.record_data.length)}>
-                                        {record.data || (index === 0 ? 'Unnamed record' : '')}
-                                    </Text>
-                                </View>)
-                            )}
-                        </View>)
+                        <TouchableHighlight onLongPress={() => this.onRemoveRecord(table._id, item._id)}>
+                            <View
+                                style={ESS.child(styles, 'record', index, table.records.length)}
+                                onPress={() => this.onOpenRecord(item._id)}
+                            >
+                                {item.record_data.slice(0,4).map((record, index) =>
+                                    (<View key={record._id}
+                                           style={ESS.child(styles, 'recordContainer', index, item.record_data.length)}
+                                           onPress={() => this.onOpenRecord(item._id)}
+                                    >
+                                        <Text style={styles.fieldName} numberOfLines={1}>
+                                            {index !== 0 &&
+                                            table.fields[index].name}
+                                        </Text>
+                                        <Text style={ESS.child(styles, 'recordData', index, item.record_data.length)}
+                                            numberOfLines={1}
+                                        >
+                                            {record.data || (index === 0 ? 'Unnamed record' : ' ')}
+                                        </Text>
+                                    </View>)
+                                )}
+                                <Button title='Delete' onPress={() => this.onRemoveRecord(table._id, item._id)}/>
+                            </View>
+                        </TouchableHighlight>)
                     }
                 />
                 <ActionButton
                     buttonColor='rgba(40,130,255,1)'
                     offsetY={15}
-                    onPress={() => this.onAddRecord(123)}/>
+                    onPress={() => this.onAddRecord(table._id)}/>
             </View>
         );
     }
@@ -107,19 +100,23 @@ const styles = ESS.create({
     recordContainer: {
         padding: 4,
         margin: 4,
-        // borderColor: 'rgba(0,0,0,0.8)',
-        // borderRadius: 4,
-        // borderWidth: 1,
     },
     'recordContainer:first-child': {
         width: '98%',
+        maxWidth: '100%'
     },
-    'recordName:first-child': {
+    recordData: {
+        maxWidth: 100,
+    },
+    'recordData:first-child': {
         fontSize: 20,
+        maxWidth: '100%',
         color: '#000',
     },
     fieldName: {
-
+        width: 100,
+        maxWidth: 100,
+        overflow: 'hidden',
     }
 });
 

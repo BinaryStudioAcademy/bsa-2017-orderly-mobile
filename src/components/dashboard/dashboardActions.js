@@ -7,7 +7,6 @@ export const GET_TABLES_ERROR = 'GET_TABLES_ERROR';
 export const SWITCH_TABLE = 'SWITCH_TABLE';
 
 export function getTables(tablesId) {
-    console.log('ACTION GET TABLES');
     return {
         type: GET_TABLES,
         tablesId: tablesId,
@@ -15,8 +14,6 @@ export function getTables(tablesId) {
 }
 
 export function switchTable(tableId) {
-    console.log('ACTION SWITCH TABLE');
-    console.log(tableId);
     return {
         type: SWITCH_TABLE,
         tableId: tableId,
