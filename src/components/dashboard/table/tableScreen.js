@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Text, View, Button, Image, FlatList, TouchableHighlight} from 'react-native';
+import {Text, View, Button, Image, FlatList, TouchableHighlight, TouchableOpacity} from 'react-native';
 import ESS from 'react-native-extended-stylesheet';
 import {bindActionCreators} from 'redux';
 import * as tableActions from './tableActions';
 import ActionButton from 'react-native-action-button';
+import NavigatorService from '../../../navigators/navigatorService';
 
 class Table extends Component {
     static navigationOptions = ({navigation}) => {
@@ -27,8 +28,12 @@ class Table extends Component {
         this.props.removeRecord(tableId, recordId);
     };
 
+    onChangeRecord = (tableId, id, value, user) => {
+        this.props.changeRecord(tableId, id, value, user);
+    };
+
     render() {
-        const {table} = this.props.screenProps;
+        const {table, baseColor, base} = this.props.screenProps;
         console.log('TABLE PROPS');
         console.log(this.props);
         return (
@@ -38,15 +43,24 @@ class Table extends Component {
                     data={table.records}
                     keyExtractor={(record) => record._id}
                     renderItem={({item, index}) => (
-                        <TouchableHighlight onLongPress={() => this.onRemoveRecord(table._id, item._id)}>
-                            <View
+                        <TouchableHighlight //onLongPress={() => this.onRemoveRecord(table._id, item._id)}
+                        >
+                            <TouchableOpacity
                                 style={ESS.child(styles, 'record', index, table.records.length)}
-                                onPress={() => this.onOpenRecord(item._id)}
+                                //onPress={() => this.onOpenRecord(item._id)}
+                                onPress={() => NavigatorService.navigate('RecordItem', {table: table,
+                                                                                        currentRecord: item,
+                                                                                        currentRecordIndex: index,
+                                                                                        baseColor: baseColor,
+                                                                                        changeRecord: this.onChangeRecord,
+                                                                                        removeRecord: this.onRemoveRecord,
+                                                                                        base: base})}
                             >
                                 {item.record_data.slice(0,4).map((record, index) =>
                                     (<View key={record._id}
                                            style={ESS.child(styles, 'recordContainer', index, item.record_data.length)}
-                                           onPress={() => this.onOpenRecord(item._id)}
+                                           //onPress={() => this.onOpenRecord(item._id)}
+
                                     >
                                         <Text style={styles.fieldName} numberOfLines={1}>
                                             {index !== 0 &&
@@ -59,8 +73,8 @@ class Table extends Component {
                                         </Text>
                                     </View>)
                                 )}
-                                <Button title='Delete' onPress={() => this.onRemoveRecord(table._id, item._id)}/>
-                            </View>
+
+                            </TouchableOpacity>
                         </TouchableHighlight>)
                     }
                 />
@@ -72,7 +86,7 @@ class Table extends Component {
         );
     }
 }
-
+//<Button title='Delete' onPress={() => this.onRemoveRecord(table._id, item._id)}/>
 const styles = ESS.create({
     container: {
         flex: 1,

@@ -39,3 +39,9 @@ export function removeRecord(tableId, recordId) {
         .then((response) => response)
         .catch((err) => err.data);
 }
+
+export function updateTable({ _id, body }) {
+	return axios.put(tableUrl + '/' + _id, body)
+		.then((response) => response.data)
+		.catch((err) => err.data);
+}

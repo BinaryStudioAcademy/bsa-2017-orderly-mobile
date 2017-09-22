@@ -1,4 +1,4 @@
-import {GET_TABLES_DONE, GET_BASE_DONE, SWITCH_TABLE} from './dashboardActions';
+import {GET_TABLES_DONE, GET_BASE_DONE, SWITCH_TABLE, PERFORM_CHANGE_RECORD} from './dashboardActions';
 import {UPDATE_RECORD_DONE} from './table/tableActions';
 import R from 'ramda';
 
@@ -38,6 +38,60 @@ function dashboardReducer(state = initialState, action) {
                 })(state.tables)
             }
         ]);
+
+
+    case 'PERFORM_CHANGE_RECORD': {
+        return R.mergeAll([
+        R.omit(['tables'], state),
+        {
+            tables: R.map((table) => {
+                if (table._id === action.tableId) {
+                    return R.mergeAll([
+                        R.dissoc('records', table),
+                        {
+                            records: R.map((record) => {
+                                let changes = null;
+                                const recordData = R.addIndex(R.map)((recordItem, fieldIndex) => {
+                                    if ((recordItem._id === action.recordId) && (recordItem.data !== action.data)) {
+                                        changes = {
+                                            'field_id': table.fields[fieldIndex]._id,
+                                            'record_id': recordItem._id,
+                                            'changed_from': recordItem.data,
+                                            'changed_to': action.data
+                                        };
+
+                                        let newObj = R.dissoc('data', recordItem);
+                                        newObj.data = action.data;
+                                        return newObj;
+                                    } else {
+                                        return recordItem;
+                                    }
+                                })(record.record_data);
+
+                                let history = {};
+                                if (changes) {
+                                    history = {
+                                        history: R.concat(record.history, [{
+                                            collaborator: action.user,
+                                            changes: changes
+                                        }])
+                                    };
+                                }
+
+                                return R.mergeAll([
+                                    R.dissoc('record_data', record),
+                                    {
+                                        record_data: recordData
+                                    },
+                                    history
+                                ]);
+                            })(table.records)
+                        }]);
+                }
+                return table;
+            })(state.tables)
+        }]);
+    }
 
     default: return state;
     }

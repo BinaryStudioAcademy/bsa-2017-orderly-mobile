@@ -5,15 +5,18 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {bindActionCreators} from 'redux';
 import * as dashboardActions from './dashboardActions'
 import {TablesNavigator} from '../../navigators/appNavigator';
+import { baseIcons } from '../configuration/baseIcons';
 
 class Dashboard extends Component {
     static navigationOptions = ({navigation}) => {
         console.log('DASH NAV OPTIONS');
         console.log(navigation);
         const {params} = navigation.state;
+        //title: <NavHeader baseName={params.name} baseIcon={baseIcons[params.icon]}/>,
         return {
             headerStyle: {backgroundColor: params.color},
-            title: <NavHeader baseName={params.name} baseIcon={params.icon}/>,
+            headerTintColor: 'rgb(230, 230, 230)',
+            headerTitle: <NavHeader baseName={params.name} baseIcon={baseIcons[params.icon]}/>
         }
     };
 
@@ -55,7 +58,7 @@ class Dashboard extends Component {
                     </View>
                 </View>
                 {this.props.dashboard.tables[0] &&
-                    <TablesNavigator screenProps={{table: this.props.dashboard.tables[0]}}/>
+                    <TablesNavigator screenProps={{table: this.props.dashboard.tables[0], baseColor: base.color, base: base}}/>
                 }
             </View>
         );
@@ -82,10 +85,12 @@ const styles = StyleSheet.create({
     viewIcon: {
         marginRight: 5,
         color: '#000',
+        color: 'rgb(255, 255, 255)',
     },
     viewName: {
         color: '#000',
         fontSize: 20,
+        color: 'rgb(255, 255, 255)',
     },
     viewControls: {
         flexDirection: 'row',
@@ -103,16 +108,21 @@ const styles = StyleSheet.create({
     },
     controlsText: {
         fontSize: 20,
-        color: '#000',
+        color: 'rgb(255, 255, 255)',
     },
+    headerTitle: {
+        marginLeft: 12,
+        fontSize: 18,
+        fontWeight: '500',
+        color: 'rgb(230, 230, 230)',
+    }
 });
 
 const NavHeader = ({baseName, baseIcon}) => {
     return (
-        <Text>
-            <Icon name={baseIcon} size={25}/>
-            <Text>  </Text>
-            {baseName}
+        <Text style={styles.headerTitle}>
+            <Icon name={baseIcon} size={22}/>
+            <Text>  {baseName}</Text>
         </Text>
     )
 };

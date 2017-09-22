@@ -13,6 +13,7 @@ import HomeScreen from '../components/homeScreen/homePageConnect';
 import EditTeamScreen from '../components/homeScreen/homePageTeam/teams/team/editTeamScreen';
 import UserProfileScreen from '../components/userProfile/userProfileScreen';
 import DashboardScreen from '../components/dashboard/dashboardScreen';
+import RecordItemScreen from '../components/dashboard/table/recordItem/recordItemScreen';
 import TableScreen from '../components/dashboard/table/tableScreen';
 
 export const TablesNavigator = TabNavigator({
@@ -29,7 +30,8 @@ export const AppNavigator = StackNavigator({
     Home: { screen: HomeScreen },
     UserProfile: { screen: UserProfileScreen },
     Dashboard: { screen: DashboardScreen },
-    EditTeamScreen: { screen: EditTeamScreen }
+    EditTeam: { screen: EditTeamScreen },
+    RecordItem: {screen: RecordItemScreen }
 },
     { headerMode: 'screen' }
 );
