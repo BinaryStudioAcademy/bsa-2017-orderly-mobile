@@ -21,7 +21,7 @@
         }
     },
     "rules": {
-        "indent": ["error", 2],
+        "indent": ["error", 4],
         "strict": ["error", "global"],
         "semi": ["error", "always"],
         "no-unused-vars": ["error", { "vars": "all", "args": "after-used", "caughtErrors": "none" }],
@@ -31,6 +31,7 @@
         "arrow-parens": ["error", "always"],
         "no-confusing-arrow": ["error", { "allowParens": false }],
         "no-constant-condition": "error",
+        "no-case-declarations": "off",
         "no-labels": "error",
         "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 1 }],
         "func-style": "off",
