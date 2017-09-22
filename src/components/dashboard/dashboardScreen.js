@@ -1,89 +1,140 @@
-import React, { Component } from 'react';
-import {
-  AppRegistry, StyleSheet, Text, View, Button, Image, FlatList
-} from 'react-native';
-import { Icon } from 'react-native-elements'
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {StyleSheet, Text, View, Button, Image, FlatList} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import {bindActionCreators} from 'redux';
+import * as dashboardActions from './dashboardActions'
+import {TablesNavigator} from '../../navigators/appNavigator';
+import { baseIcons } from '../configuration/baseIcons';
 
-export default class Dashboard extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      baseName: '',
+class Dashboard extends Component {
+    static navigationOptions = ({navigation}) => {
+        console.log('DASH NAV OPTIONS');
+        console.log(navigation);
+        const {params} = navigation.state;
+        //title: <NavHeader baseName={params.name} baseIcon={baseIcons[params.icon]}/>,
+        return {
+            headerStyle: {backgroundColor: params.color},
+            headerTintColor: 'rgb(230, 230, 230)',
+            headerTitle: <NavHeader baseName={params.name} baseIcon={baseIcons[params.icon]}/>
+        }
     };
-  }
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <View style={styles.headerBase}>
-            <Button style={styles.headerHome} title='home' onPress={() => {
-              this.state.baseName ?
-                this.setState({baseName: ''})
-                :
-                this.setState({baseName: 'Clones'});
-            }}/>
-            <View style={styles.baseTitle}>
-              <Icon name='book'/>
-              <Text style={styles.baseName}>{this.state.baseName || 'Default'}</Text>
+    componentWillMount() {
+        console.log('WILL MOUNT');
+        console.log(this.props);
+        this.props.getTables(this.props.navigation.state.params.tables);
+    }
+
+    componentDidMount() {
+        console.log(this.props);
+        console.log('DID MOUNT');
+    }
+
+    onSwitchTable = (tableId) => {
+        this.props.switchTable(tableId);
+    };
+
+    render() {
+        console.log('DASHBOARD PROPS');
+        console.log(this.props);
+        const base = this.props.navigation.state.params;
+        return (
+            <View style={styles.container}>
+                <View style={[styles.viewHeader, {backgroundColor: base.color, opacity: 0.8}]}>
+                    <View style={styles.viewSelector}>
+                        <Icon style={styles.viewIcon} name='th' size={25}/>
+                        <Text style={styles.viewName}>Grid view</Text>
+                    </View>
+                    <View style={styles.viewControls}>
+                        <View style={styles.viewFilter}>
+                            <Icon style={styles.viewIcon} name='filter' size={20}/>
+                            <Text style={styles.controlsText}>Filter</Text>
+                        </View>
+                        <View style={styles.viewSort}>
+                            <Icon style={styles.viewIcon} name='sort-amount-desc' size={18}/>
+                            <Text style={styles.controlsText}>Sort</Text>
+                        </View>
+                    </View>
+                </View>
+                {this.props.dashboard.tables[0] &&
+                    <TablesNavigator screenProps={{table: this.props.dashboard.tables[0], baseColor: base.color, base: base}}/>
+                }
             </View>
-            <Image style={[styles.headerUser, {width: 30, height: 30}]} source={require('../../images/default-avatar.png')}/>
-          </View>
-        </View>
-        <FlatList
-            data={[
-              {key: 'Devin'},{key: 'Jackson'},{key: 'James'},{key: 'Joel'},{key: 'John'},{key: 'Jillian'},{key: 'Jimmy'},{key: 'Julie'},
-              {key: 'Devin2'},{key: 'Jackson2'},{key: 'James2'},{key: 'Joel2'},{key: 'John2'},{key: 'Jillian2'},{key: 'Jimmy2'},{key: 'Julie2'},
-              {key: 'Devin3'},{key: 'Jackson3'},{key: 'James3'},{key: 'Joel3'},{key: 'John3'},{key: 'Jillian3'},{key: 'Jimmy3'},{key: 'Julie3'},
-            ]}
-            renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
-          />
-      </View>
-    );
-  }
+        );
+    }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#EEE',
-  },
-  header: {
-    height: 50,
-    backgroundColor: '#000',
-  },
-  headerBase: {
-    // flex: 1,
-    alignItems: 'center',
-    flexDirection: 'row',
-    backgroundColor: '#AAA',
-  },
-  baseTitle: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  headerHome: {
-    color: '#F00',
-  },
-  baseName: {
-    // flex: 1,
-    textAlign: 'center',
-    fontSize: 20,
-  },
-  headerUser: {
-    height: 50,
-    width: 50,
-    resizeMode: 'center',
-  },
-  item: {
-    borderRadius: 10,
-    backgroundColor: '#AAF',
-    padding: 5,
-    fontSize: 17,
-    margin: 5,
-    // height: 44,
-  },
+    container: {
+        flex: 1,
+        backgroundColor: '#FFF',
+    },
+    viewHeader: {
+        height: 50,
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        backgroundColor: '#AAA',
+    },
+    viewSelector: {
+        alignItems: 'baseline',
+        flexDirection: 'row',
+        paddingLeft: 10,
+    },
+    viewIcon: {
+        marginRight: 5,
+        color: '#000',
+        color: 'rgb(255, 255, 255)',
+    },
+    viewName: {
+        color: '#000',
+        fontSize: 20,
+        color: 'rgb(255, 255, 255)',
+    },
+    viewControls: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        marginRight: 10,
+    },
+    viewFilter: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    viewSort: {
+        flexDirection: 'row',
+        marginLeft: 20,
+        alignItems: 'center',
+    },
+    controlsText: {
+        fontSize: 20,
+        color: 'rgb(255, 255, 255)',
+    },
+    headerTitle: {
+        marginLeft: 12,
+        fontSize: 18,
+        fontWeight: '500',
+        color: 'rgb(230, 230, 230)',
+    }
 });
 
-AppRegistry.registerComponent('Dashboard', () => Dashboard);
+const NavHeader = ({baseName, baseIcon}) => {
+    return (
+        <Text style={styles.headerTitle}>
+            <Icon name={baseIcon} size={22}/>
+            <Text>  {baseName}</Text>
+        </Text>
+    )
+};
+
+const mapStateToProps = (state) => {
+    return {
+        dashboard: state.dashboard,
+    }
+};
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(dashboardActions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

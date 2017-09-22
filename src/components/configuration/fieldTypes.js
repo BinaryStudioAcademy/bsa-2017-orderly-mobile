@@ -1,18 +1,18 @@
 export const fieldIcons = {
     'text': 'font',
-    'longtext': 'align left',
+    'longtext': 'align-left',
     'number': 'hashtag',
-    'select': 'play circle',
-    'multiple':'list ul',
-    'autonumber': 'sort numeric ascending',
+    'select': 'play-circle',
+    'multiple':'list-ul',
+    'autonumber': 'sort-numeric-asc',
     'url': 'chain',
-    'currency': 'currency',
+    'currency': 'money',
     'date': 'calendar',
-    'email': 'mail outline',
+    'email': 'envelope-o',
     'percent': 'percent',
     'phone': 'phone',
-    'attachment': 'file outline',
-    'checkbox': 'checkmark box'
+    'attachment': 'file-o',
+    'checkbox': 'check-square-o'
 };
 
 export const fieldNames = {

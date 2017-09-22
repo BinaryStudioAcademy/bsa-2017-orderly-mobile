@@ -31,7 +31,7 @@ class TeamHeader extends Component {
                     <TouchableOpacity>
                         <Icon name='mode-edit'
                             style={styles.teamEditIcon}
-                            onPress={() => NavigatorService.navigate('EditTeamScreen', {id: this.props.team._id, name: this.props.team.name})}/>
+                            onPress={() => NavigatorService.navigate('EditTeam', {id: this.props.team._id, name: this.props.team.name})}/>
                     </TouchableOpacity>
             </View>
 		)

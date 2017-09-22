@@ -1,8 +1,10 @@
 package com.orderlynative;
 
 import android.app.Application;
-import com.imagepicker.ImagePickerPackage; // <-- add this import
+import com.imagepicker.ImagePickerPackage;
 import com.facebook.react.ReactApplication;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.smixx.reactnativeicons.ReactNativeIcons;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -23,7 +25,9 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-          new ImagePickerPackage()
+          new ImagePickerPackage(),
+          new VectorIconsPackage(),
+          new ReactNativeIcons()
       );
     }
   };

@@ -1,18 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addNavigationHelpers, StackNavigator, NavigationActions } from 'react-navigation';
+import { addNavigationHelpers, StackNavigator, NavigationActions, TabNavigator } from 'react-navigation';
 import axios from 'axios';
-import LoginScreen from '../components/auth/login/loginScreen';
+import AppConfig from '../config';
+import NavigatorService from './navigatorService';
+import Auth from '../components/auth/auth';
 import SignupScreen from '../components/auth/signUp/signupScreen';
+import LoginScreen from '../components/auth/login/loginScreen';
 import Logout from '../components/auth/logout/logout';
 import HomeScreen from '../components/homeScreen/homePageConnect';
 import EditTeamScreen from '../components/homeScreen/homePageTeam/teams/team/editTeamScreen';
 import UserProfileScreen from '../components/userProfile/userProfileScreen';
 import DashboardScreen from '../components/dashboard/dashboardScreen';
-import Auth from '../components/auth/auth';
-import AppConfig from '../config';
-import NavigatorService from './navigatorService';
+import RecordItemScreen from '../components/dashboard/table/recordItem/recordItemScreen';
+import TableScreen from '../components/dashboard/table/tableScreen';
+
+export const TablesNavigator = TabNavigator({
+    Table: {screen: TableScreen},
+    Table2: {screen: TableScreen},
+}, {
+    tabBarPosition: 'bottom',
+});
 
 export const AppNavigator = StackNavigator({
     Login: { screen: LoginScreen },
@@ -21,7 +30,8 @@ export const AppNavigator = StackNavigator({
     Home: { screen: HomeScreen },
     UserProfile: { screen: UserProfileScreen },
     Dashboard: { screen: DashboardScreen },
-    EditTeamScreen: { screen: EditTeamScreen }
+    EditTeam: { screen: EditTeamScreen },
+    RecordItem: {screen: RecordItemScreen }
 },
     { headerMode: 'screen' }
 );
